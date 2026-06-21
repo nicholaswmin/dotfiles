@@ -31,10 +31,11 @@ git -C "$HOME" config --get user.signingkey | grep -q .         || fail "signing
 [ -z "$(git -C "$HOME" ls-files .zsh/local.zsh .zsh_history .zcompdump .DS_Store)" ] \
   || fail "a machine-local or ephemeral file is tracked"
 
-# editor associations - settable/verifiable only from a GUI (Aqua) session;
-# LaunchServices ignores default-handler changes from a background shell (ssh/CI)
-if [ "$(launchctl managername 2>/dev/null)" = Aqua ] && command -v duti >/dev/null; then
-  duti -x sh 2>/dev/null | grep -qi zed                         || fail "duti: .sh not mapped to Zed"
+# editor associations were applied. .sh is intentionally NOT checked: shell scripts
+# are executables, and LaunchServices refuses a text editor as their default handler,
+# so duti cannot map them; .py is a representative code type that does map.
+if command -v duti >/dev/null; then
+  duti -x py 2>/dev/null | grep -qi zed                         || fail "duti: .py not mapped to Zed"
 fi
 
 echo "assert: ok"
