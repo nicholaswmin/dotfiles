@@ -1,12 +1,11 @@
 # dotfiles
 
 > Operating instructions for this `dotfiles` repo, for humans and coding agents.
-> The normative contract is `docs/spec.md`; this file enforces it.
 > Git tracking follows the [DeVault convention][dv-dot] (`gitignore *` + force-add).
 
 ## Shape
 
-The contract is `docs/spec.md`. In short: `$HOME` is the repo, `.gitignore` is a single `*`,
+In short: `$HOME` is the repo, `.gitignore` is a single `*`,
 track by `git add -f`, files in place (no symlinks, no alias, no manager). zsh entry files sit
 at `$HOME`, authored modules under `~/.zsh/`, secret values in the macOS keychain.
 
