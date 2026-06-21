@@ -4,6 +4,7 @@
 # shell + cli
 brew "coreutils"      # GNU coreutils (PATH adds its gnubin)
 brew "tree"
+brew "fd"             # fast find (the fd function)
 brew "gh"             # GitHub CLI
 brew "httpie"
 brew "glow"           # markdown in the terminal
@@ -22,6 +23,10 @@ brew "postgresql@18"
 # cloud + media
 brew "awscli"
 brew "ffmpeg"
+brew "cloudflared"   # tunnels (the tunnel function)
+brew "heroku"        # heroku CLI
+brew "kubernetes-cli" # kubectl
+brew "shpotify"      # spotify CLI (the spotify function)
 
 # ai clis
 cask "codex"          # OpenAI Codex CLI

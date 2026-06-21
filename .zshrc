@@ -1,6 +1,6 @@
 # ~/.zshrc      interactive
 setopt extended_glob
-fpath=(~/.zsh/functions ~/.zsh/completions $fpath)
+fpath=(/opt/homebrew/share/zsh/site-functions ~/.zsh/functions ~/.zsh/completions $fpath)
 for fn in ~/.zsh/functions/*(N:t); autoload -Uz $fn
 HISTFILE=~/.zsh_history; HISTSIZE=10000; SAVEHIST=10000
 autoload -Uz compinit
