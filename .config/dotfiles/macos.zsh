@@ -56,8 +56,9 @@ if [[ -d $proj ]] && ! defaults read com.apple.Spotlight Exclusions 2>/dev/null 
   killall mds 2>/dev/null || true
 fi
 
-# Editor - Zed as default for code files (associations in the sibling `duti` file)
+# Editor - Zed as default for code files (associations in the sibling `duti` file).
+# Skipped under CI - GitHub runners do not honour LaunchServices handler changes.
 say editor
-if command -v duti >/dev/null; then
+if [[ -z "${CI:-}" ]] && command -v duti >/dev/null; then
   duti "${0:A:h}/duti" || say "duti: some associations not applied (see log)"
 fi
