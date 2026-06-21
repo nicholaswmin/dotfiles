@@ -1,0 +1,25 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  restore:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - name: restore this commit on the runner twice (idempotent), then assert
+        env:
+          DOTFILES_REPO: ${{ github.server_url }}/${{ github.repository }}
+          DOTFILES_REF: ${{ github.sha }}
+        run: |
+          sh .config/dotfiles/bootstrap.sh
+          sh .config/dotfiles/bootstrap.sh
+          sh "$HOME/.config/dotfiles/test/assert.sh"

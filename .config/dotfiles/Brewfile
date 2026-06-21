@@ -1,0 +1,36 @@
+# Brewfile, basics
+# The Xcode Command Line Tools are a prerequisite; not installed here.
+
+# shell + cli
+brew "coreutils"      # GNU coreutils (PATH adds its gnubin)
+brew "tree"
+brew "gh"             # GitHub CLI
+brew "httpie"
+brew "glow"           # markdown in the terminal
+brew "mas"            # Mac App Store CLI
+brew "duti"           # default-app associations
+
+# runtimes
+brew "fnm"            # node version manager
+brew "uv"             # python
+
+# data services
+brew "redis"
+brew "postgresql@18"
+
+# cloud + media
+brew "awscli"
+brew "ffmpeg"
+
+# ai clis
+cask "codex"          # OpenAI Codex CLI
+cask "claude-code"    # Claude Code CLI
+
+# apps
+cask "zed"            # editor (EDITOR + default for code files)
+cask "claude"         # Claude desktop
+cask "chatgpt"        # ChatGPT desktop
+cask "google-chrome"
+cask "docker-desktop"
+cask "slack"
+cask "spotify"
