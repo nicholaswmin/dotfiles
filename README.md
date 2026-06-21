@@ -12,23 +12,18 @@
 +-- .zshenv           read first; env, not PATH
 +-- .zprofile         login; PATH + brew shellenv
 +-- .zshrc            interactive; sources ~/.zsh/, then local.zsh
-+-- .zsh/             modules (*.zsh) + functions/ + completions/
++-- .zsh/             *.zsh modules + functions/ + completions/
 |   +-- secrets.zsh   load_secret/secret helpers
-|   +-- local.zsh     untracked; machine-local + secret wiring, last
+|   +-- local.zsh     untracked; machine-local + secrets, last
 +-- .config/
-|   +-- git/          config, ignore (XDG)
+|   +-- git/          config, ignore
 |   +-- dotfiles/     Brewfile, bootstrap.sh, macos.zsh, duti, test/
 +-- .local/bin/       executables
 ```
 
 ## restore
 
-assumes [Xcode Command Line Tools][Xcode-tools]; provisions a fresh macOS box
-end-to-end:
-
-- installs `homebrew`
-- checks the repo out into `$HOME`
-- runs `brew bundle` and the macOS `defaults`
+needs [Xcode Command Line Tools][xcode]. then:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/nicholaswmin/dotfiles/main/.config/dotfiles/bootstrap.sh -o /tmp/bootstrap.sh
@@ -36,14 +31,23 @@ sh /tmp/bootstrap.sh
 exec zsh -l
 ```
 
-> **note:** checkout overwrites colliding stock files; back up first. Fetch and
-> clone stay anonymous HTTPS; `git push` uses SSH (`pushInsteadOf`), so set up
-> your SSH + signing key before pushing.
+installs homebrew, checks the repo into `$HOME`, runs `brew bundle` and macOS
+`defaults`. checkout overwrites colliding stock files, so back up first.
+
+## after
+
+bootstrap skips anything secret or machine-bound. on a fresh box:
+
+- ssh + signing key at `~/.ssh/id_ed25519_signing.pub`, added to GitHub
+- `gh auth login`
+- `aws` and `cloudflared` logins
+- create the `environment` keychain, add keys like `brave`
+- `fnm install --lts && fnm default lts-latest`
 
 ## tracking
 
-everything in `$HOME` is ignored, so force-add what to track (`git ls-files` is
-the manifest):
+everything in `$HOME` is ignored; force-add what to track. `git ls-files` is
+the manifest.
 
 ```sh
 git add -f ~/.config/foo
@@ -53,16 +57,16 @@ git commit -m "feat: track foo"
 ## secrets
 
 secrets live in the macOS keychain, never in the repo; wire them in untracked
-`~/.zsh/local.zsh`:
+`~/.zsh/local.zsh`.
 
 ```sh
-load_secret OPENROUTER_API_KEY openrouter   # export, fails loud
-curl -fsS -H "Authorization: Bearer $(secret CLOUDFLARE_GLOBAL_API_TOKEN)" "$api"
+load_secret OPENROUTER_API_KEY openrouter
+curl -fsS -H "Authorization: Bearer $(secret CLOUDFLARE_API_TOKEN)" "$api"
 ```
 
 ## tests
 
-requires [tart][tart]:
+needs [tart][tart].
 
 ```sh
 brew install cirruslabs/cli/tart
@@ -70,5 +74,5 @@ sh .config/dotfiles/test/test.sh
 ```
 
 [gh-author]: https://github.com/nicholaswmin
-[Xcode-tools]: https://developer.apple.com/xcode/
+[xcode]: https://developer.apple.com/xcode/
 [tart]: https://tart.run
