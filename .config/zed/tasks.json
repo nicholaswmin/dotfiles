@@ -1,0 +1,14 @@
+[
+  {
+    "label": "serve_and_open",
+    "command": "sh",
+    "args": [
+      "-c",
+      "pkill -f 'serve -l 5111' 2>/dev/null; npx --yes serve@latest -l 5111 . & pid=$!; until curl -fsS http://localhost:5111 >/dev/null; do sleep 0.1; done; open http://localhost:5111; wait $pid"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "reveal": "no_focus",
+    "hide": "never"
+  }
+]

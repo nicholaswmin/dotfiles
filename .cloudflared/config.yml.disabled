@@ -1,0 +1,7 @@
+tunnel: b2887fff-352e-4bcd-adf6-49c6a72f36e6
+credentials-file: /Users/nicholaswmin/.cloudflared/b2887fff-352e-4bcd-adf6-49c6a72f36e6.json
+
+ingress:
+  - hostname: local.bitpaper.io
+    service: http://localhost:3001
+  - service: http_status:404

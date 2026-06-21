@@ -1,0 +1,376 @@
+# Zed Editor File Associations
+# Bundle ID: dev.zed.Zed
+
+# Programming Languages
+dev.zed.Zed .js all
+dev.zed.Zed .jsx all
+dev.zed.Zed .ts all
+dev.zed.Zed .tsx all
+dev.zed.Zed .mjs all
+dev.zed.Zed .cjs all
+dev.zed.Zed .py all
+dev.zed.Zed .pyw all
+dev.zed.Zed .rb all
+dev.zed.Zed .go all
+dev.zed.Zed .rs all
+dev.zed.Zed .c all
+dev.zed.Zed .h all
+dev.zed.Zed .cpp all
+dev.zed.Zed .cc all
+dev.zed.Zed .cxx all
+dev.zed.Zed .hpp all
+dev.zed.Zed .hxx all
+dev.zed.Zed .java all
+dev.zed.Zed .kt all
+dev.zed.Zed .swift all
+dev.zed.Zed .m all
+dev.zed.Zed .mm all
+dev.zed.Zed .cs all
+dev.zed.Zed .php all
+dev.zed.Zed .lua all
+dev.zed.Zed .pl all
+dev.zed.Zed .pm all
+dev.zed.Zed .r all
+dev.zed.Zed .R all
+dev.zed.Zed .scala all
+dev.zed.Zed .clj all
+dev.zed.Zed .cljs all
+dev.zed.Zed .dart all
+dev.zed.Zed .elm all
+dev.zed.Zed .ex all
+dev.zed.Zed .exs all
+dev.zed.Zed .erl all
+dev.zed.Zed .hrl all
+dev.zed.Zed .fs all
+dev.zed.Zed .fsx all
+dev.zed.Zed .ml all
+dev.zed.Zed .mli all
+dev.zed.Zed .nim all
+dev.zed.Zed .zig all
+dev.zed.Zed .v all
+dev.zed.Zed .vb all
+dev.zed.Zed .pas all
+dev.zed.Zed .pp all
+dev.zed.Zed .asm all
+dev.zed.Zed .s all
+
+# Web Technologies
+dev.zed.Zed .html all
+dev.zed.Zed .htm all
+dev.zed.Zed .xhtml all
+dev.zed.Zed .css all
+dev.zed.Zed .scss all
+dev.zed.Zed .sass all
+dev.zed.Zed .less all
+dev.zed.Zed .styl all
+dev.zed.Zed .vue all
+dev.zed.Zed .svelte all
+dev.zed.Zed .astro all
+
+# Data Formats
+dev.zed.Zed .json all
+dev.zed.Zed .jsonc all
+dev.zed.Zed .json5 all
+dev.zed.Zed .xml all
+dev.zed.Zed .yaml all
+dev.zed.Zed .yml all
+dev.zed.Zed .toml all
+dev.zed.Zed .ini all
+dev.zed.Zed .cfg all
+dev.zed.Zed .conf all
+dev.zed.Zed .csv all
+dev.zed.Zed .tsv all
+
+# Documentation
+dev.zed.Zed .md all
+dev.zed.Zed .markdown all
+dev.zed.Zed .mdown all
+dev.zed.Zed .mkd all
+dev.zed.Zed .mdx all
+dev.zed.Zed .rst all
+dev.zed.Zed .txt all
+dev.zed.Zed .text all
+dev.zed.Zed .tex all
+dev.zed.Zed .latex all
+dev.zed.Zed .org all
+dev.zed.Zed .adoc all
+dev.zed.Zed .asciidoc all
+dev.zed.Zed .pod all
+
+# Shell Scripts
+dev.zed.Zed .sh all
+dev.zed.Zed .bash all
+dev.zed.Zed .zsh all
+dev.zed.Zed .fish all
+dev.zed.Zed .ksh all
+dev.zed.Zed .csh all
+dev.zed.Zed .tcsh all
+dev.zed.Zed .ps1 all
+dev.zed.Zed .psm1 all
+dev.zed.Zed .psd1 all
+dev.zed.Zed .bat all
+dev.zed.Zed .cmd all
+
+# Config Files
+dev.zed.Zed .env all
+dev.zed.Zed .env.local all
+dev.zed.Zed .env.development all
+dev.zed.Zed .env.production all
+dev.zed.Zed .env.test all
+dev.zed.Zed .gitignore all
+dev.zed.Zed .gitattributes all
+dev.zed.Zed .gitmodules all
+dev.zed.Zed .editorconfig all
+dev.zed.Zed .eslintrc all
+dev.zed.Zed .prettierrc all
+dev.zed.Zed .babelrc all
+dev.zed.Zed .npmrc all
+dev.zed.Zed .yarnrc all
+dev.zed.Zed .nvmrc all
+dev.zed.Zed .rvmrc all
+dev.zed.Zed .ruby-version all
+dev.zed.Zed .python-version all
+dev.zed.Zed .node-version all
+dev.zed.Zed .tool-versions all
+dev.zed.Zed .dockerignore all
+dev.zed.Zed .helmignore all
+
+# Build Files
+dev.zed.Zed Dockerfile all
+dev.zed.Zed Containerfile all
+dev.zed.Zed Makefile all
+dev.zed.Zed makefile all
+dev.zed.Zed GNUmakefile all
+dev.zed.Zed CMakeLists.txt all
+dev.zed.Zed Rakefile all
+dev.zed.Zed Gemfile all
+dev.zed.Zed Pipfile all
+dev.zed.Zed Cargo.toml all
+dev.zed.Zed package.json all
+dev.zed.Zed composer.json all
+dev.zed.Zed build.gradle all
+dev.zed.Zed pom.xml all
+dev.zed.Zed tsconfig.json all
+dev.zed.Zed webpack.config.js all
+dev.zed.Zed rollup.config.js all
+dev.zed.Zed vite.config.js all
+dev.zed.Zed next.config.js all
+dev.zed.Zed nuxt.config.js all
+dev.zed.Zed jest.config.js all
+dev.zed.Zed karma.conf.js all
+dev.zed.Zed .travis.yml all
+dev.zed.Zed .gitlab-ci.yml all
+dev.zed.Zed .circleci all
+dev.zed.Zed Jenkinsfile all
+dev.zed.Zed Vagrantfile all
+dev.zed.Zed Procfile all
+
+# Template Files
+dev.zed.Zed .ejs all
+dev.zed.Zed .pug all
+dev.zed.Zed .jade all
+dev.zed.Zed .haml all
+dev.zed.Zed .slim all
+dev.zed.Zed .liquid all
+dev.zed.Zed .hbs all
+dev.zed.Zed .handlebars all
+dev.zed.Zed .mustache all
+dev.zed.Zed .twig all
+dev.zed.Zed .njk all
+dev.zed.Zed .nunjucks all
+dev.zed.Zed .j2 all
+dev.zed.Zed .jinja all
+dev.zed.Zed .jinja2 all
+
+# Database
+dev.zed.Zed .sql all
+dev.zed.Zed .sqlite all
+dev.zed.Zed .sqlite3 all
+dev.zed.Zed .db all
+dev.zed.Zed .dbf all
+dev.zed.Zed .mdb all
+dev.zed.Zed .pgsql all
+dev.zed.Zed .mysql all
+dev.zed.Zed .ddl all
+dev.zed.Zed .dml all
+
+# Log Files
+dev.zed.Zed .log all
+dev.zed.Zed .logs all
+dev.zed.Zed .out all
+dev.zed.Zed .err all
+dev.zed.Zed .stderr all
+dev.zed.Zed .stdout all
+
+# Other Development Files
+dev.zed.Zed .patch all
+dev.zed.Zed .diff all
+dev.zed.Zed .po all
+dev.zed.Zed .pot all
+dev.zed.Zed .mo all
+dev.zed.Zed .map all
+dev.zed.Zed .lock all
+dev.zed.Zed .pid all
+dev.zed.Zed .seed all
+dev.zed.Zed .example all
+dev.zed.Zed .sample all
+dev.zed.Zed .bak all
+dev.zed.Zed .backup all
+dev.zed.Zed .tmp all
+dev.zed.Zed .temp all
+dev.zed.Zed .swp all
+dev.zed.Zed .swo all
+dev.zed.Zed LICENSE all
+dev.zed.Zed README all
+dev.zed.Zed CHANGELOG all
+dev.zed.Zed AUTHORS all
+dev.zed.Zed CONTRIBUTORS all
+dev.zed.Zed TODO all
+dev.zed.Zed NOTES all
+
+# GraphQL
+dev.zed.Zed .graphql all
+dev.zed.Zed .gql all
+
+# Protocol Buffers
+dev.zed.Zed .proto all
+
+# Assembly/Low-level
+dev.zed.Zed .ll all
+dev.zed.Zed .bc all
+dev.zed.Zed .wasm all
+dev.zed.Zed .wat all
+
+# Jupyter Notebooks
+dev.zed.Zed .ipynb all
+
+# LaTeX
+dev.zed.Zed .bib all
+dev.zed.Zed .cls all
+dev.zed.Zed .sty all
+
+# Ruby specific
+dev.zed.Zed .gemspec all
+dev.zed.Zed .ru all
+dev.zed.Zed .erb all
+dev.zed.Zed .rake all
+
+# Python specific
+dev.zed.Zed .pyc all
+dev.zed.Zed .pyo all
+dev.zed.Zed .pyd all
+dev.zed.Zed .pyi all
+dev.zed.Zed requirements.txt all
+dev.zed.Zed setup.py all
+dev.zed.Zed setup.cfg all
+dev.zed.Zed pyproject.toml all
+dev.zed.Zed .flake8 all
+dev.zed.Zed .pylintrc all
+dev.zed.Zed tox.ini all
+
+# Node/JavaScript specific
+dev.zed.Zed .npmignore all
+dev.zed.Zed .nvmrc all
+dev.zed.Zed yarn.lock all
+dev.zed.Zed package-lock.json all
+dev.zed.Zed pnpm-lock.yaml all
+dev.zed.Zed .eslintignore all
+dev.zed.Zed .prettierignore all
+dev.zed.Zed .stylelintrc all
+
+# Go specific
+dev.zed.Zed go.mod all
+dev.zed.Zed go.sum all
+
+# Rust specific
+dev.zed.Zed Cargo.lock all
+dev.zed.Zed .rustfmt.toml all
+dev.zed.Zed .clippy.toml all
+
+# Java/Kotlin specific
+dev.zed.Zed .classpath all
+dev.zed.Zed .project all
+dev.zed.Zed gradle.properties all
+dev.zed.Zed settings.gradle all
+dev.zed.Zed gradlew all
+dev.zed.Zed mvnw all
+
+# iOS/macOS specific
+dev.zed.Zed .pbxproj all
+dev.zed.Zed .xcworkspace all
+dev.zed.Zed .xcscheme all
+dev.zed.Zed Podfile all
+dev.zed.Zed Cartfile all
+dev.zed.Zed .swiftlint.yml all
+
+# Infrastructure as Code
+dev.zed.Zed .tf all
+dev.zed.Zed .tfvars all
+dev.zed.Zed .tfstate all
+dev.zed.Zed .hcl all
+
+# Cloud Config
+dev.zed.Zed .aws all
+dev.zed.Zed .azure all
+dev.zed.Zed .gcp all
+dev.zed.Zed app.yaml all
+dev.zed.Zed serverless.yml all
+dev.zed.Zed .ebextensions all
+dev.zed.Zed .elasticbeanstalk all
+dev.zed.Zed .platform all
+
+# CI/CD
+dev.zed.Zed .buildkite all
+dev.zed.Zed .drone.yml all
+dev.zed.Zed .semaphore all
+dev.zed.Zed appveyor.yml all
+dev.zed.Zed .codeship all
+dev.zed.Zed wercker.yml all
+dev.zed.Zed buildspec.yml all
+dev.zed.Zed azure-pipelines.yml all
+dev.zed.Zed bitbucket-pipelines.yml all
+dev.zed.Zed .github all
+dev.zed.Zed .gitpod.yml all
+dev.zed.Zed .devcontainer all
+
+# Testing
+dev.zed.Zed .spec.js all
+dev.zed.Zed .test.js all
+dev.zed.Zed .spec.ts all
+dev.zed.Zed .test.ts all
+dev.zed.Zed .e2e.js all
+dev.zed.Zed .e2e.ts all
+
+# Vim files
+dev.zed.Zed .vim all
+dev.zed.Zed .vimrc all
+dev.zed.Zed .gvimrc all
+dev.zed.Zed .nvimrc all
+
+# Emacs files
+dev.zed.Zed .emacs all
+dev.zed.Zed .emacs.d all
+dev.zed.Zed .spacemacs all
+
+# VS Code
+dev.zed.Zed .vscode all
+dev.zed.Zed .code-workspace all
+dev.zed.Zed jsconfig.json all
+
+# Miscellaneous
+dev.zed.Zed .keep all
+dev.zed.Zed .gitkeep all
+dev.zed.Zed .DS_Store all
+dev.zed.Zed .env.example all
+dev.zed.Zed .env.sample all
+dev.zed.Zed .env.template all
+dev.zed.Zed hosts all
+dev.zed.Zed passwd all
+dev.zed.Zed crontab all
+dev.zed.Zed .htaccess all
+dev.zed.Zed .htpasswd all
+dev.zed.Zed robots.txt all
+dev.zed.Zed humans.txt all
+dev.zed.Zed sitemap.xml all
+dev.zed.Zed manifest.json all
+dev.zed.Zed browserconfig.xml all
