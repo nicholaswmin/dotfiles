@@ -83,5 +83,35 @@ come and go. Work in order; each step is idempotent.
    1. `zsh -lic 'exit'` returns 0 with empty stderr.
    2. `git status` clean apart from intended changes; commit.
 
+## Code Review
+
+Guidance for an automated reviewer on pull requests. This is a personal macOS dotfiles
+tree where `$HOME` is the git repo; weigh these invariants over style nits a formatter
+or linter already catches.
+
+- Flag secrets first: any secret value, token, or machine-specific line in a tracked
+  file is a finding. Secrets live in the macOS keychain, wired in untracked
+  `~/.zsh/local.zsh`; a bare variable name through `load_secret` is fine, an opaque
+  value is a leak.
+- Scrutinise newly tracked files: tracking is explicit against a `*` ignore, so
+  machine-local or ephemeral state (shell history, caches, `.DS_Store`, `local.zsh`)
+  must never be committed.
+- Keep the restore idempotent: `bootstrap.sh` and `macos.zsh` must be safe to re-run
+  and assume no prior state; a new unguarded destructive or non-idempotent step is a
+  finding (`checkout -f` is deliberate).
+- Keep the shell split: `bootstrap.sh` is POSIX sh and runs before anything is
+  installed, so flag bashisms or reliance on not-yet-present tools; `PATH` and `brew
+  shellenv` belong in `.zprofile`. Prefer modern, standards-first shell over legacy
+  shims for an environment pinned to the latest OS.
+- Protect the contract: `assert.sh` is the single definition of a working machine; flag
+  changes to bootstrap, the Brewfile, the layout, or entry files that weaken or bypass
+  it instead of keeping it honest.
+- Make additions earn their place: prefer deletion, and question speculative options,
+  fallbacks, or handling for cases that cannot occur. New code should fit the
+  surrounding idiom, not merely work.
+
+Be specific, explain the why, and point to the safer pattern; acknowledge good ones and
+ask when intent is unclear.
+
 [dv-dot]: https://drewdevault.com/2019/12/30/dotfiles.html
 [tart]: https://tart.run
