@@ -46,11 +46,15 @@ The one operational mirror of the spec's layout, kept here as the most-used look
 - Commits are signed (your git `commit.gpgsign`); do not disable it.
 - Run the test first when the change touches install or layout.
 
-## code-review
+## Code Review
 
 Guidance for an automated reviewer on pull requests. This is a personal macOS
 dotfiles tree where `$HOME` is the git repo; weigh these invariants over style
 nits a formatter or linter already catches.
+
+Target environment: macOS 26.2+ and zsh 5.9+ only; assume no earlier version
+or other platform. Strongly recommended: before reviewing, read the latest
+authoritative docs for any component a change touches.
 
 Expected layout - protect it, and flag anything that lands elsewhere:
 
@@ -101,6 +105,9 @@ $HOME/                         # the repo itself, a non-bare git checkout
   - Define each alias, function, or export once; flag duplicates and any
     whose tool is gone (`command -v` fails).
   - Machine-specific lines belong in `local.zsh`, never a tracked module.
+- Docs stay aligned.
+  - `README.md` and `AGENTS.md` must reflect any change to behaviour, layout,
+    or commands; flag drift between the docs and the code.
 - The contract is protected.
   - `assert.sh` is the single definition of a working machine.
   - Flag changes to bootstrap, the Brewfile, the layout, or entry files that
