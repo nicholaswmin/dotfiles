@@ -9,24 +9,6 @@ In short: `$HOME` is the repo, `.gitignore` is a single `*`,
 track by `git add -f`, files in place (no symlinks, no alias, no manager). zsh entry files sit
 at `$HOME`, authored modules under `~/.zsh/`, secret values in the macOS keychain.
 
-## Where things go
-
-The one operational mirror of the spec's layout, kept here as the most-used lookup:
-
-| Thing                                                     | Home                                             |
-|-----------------------------------------------------------|--------------------------------------------------|
-| universal env (not `PATH`)                                | `~/.zshenv`                                      |
-| `PATH`, `brew shellenv`                                   | `~/.zprofile` (after `path_helper`)              |
-| aliases, options, prompt, keybinds                        | a topic `~/.zsh/<topic>.zsh`                     |
-| functions                                                 | inline in a module, or `~/.zsh/functions/<name>` |
-| completions                                               | `~/.zsh/completions/_<command>`                  |
-| machine-local lines + secret wiring                       | `~/.zsh/local.zsh` (untracked, sourced last)     |
-| secret values                                             | macOS `environment` keychain                     |
-| per-tool config                                           | `~/.config/<tool>/`                              |
-| provisioning (Brewfile, bootstrap, macos.zsh, duti, test) | `~/.config/dotfiles/`                            |
-| CI workflow                                               | `~/.github/workflows/test.yml`                   |
-| personal executables                                      | `~/.local/bin/`                                  |
-
 ## Tracking
 
 - Track: `git add -f <path>`, then `git commit`. A plain `git add` is a no-op (the `*` ignores it).
@@ -64,15 +46,17 @@ $HOME/                         # the repo itself, a non-bare git checkout
 +-- .zprofile                  # login; PATH + brew shellenv, after path_helper
 +-- .zshrc                     # interactive; sources ~/.zsh/, then local.zsh
 +-- .zsh/
-|   +-- <topic>.zsh            # topic modules, sourced in order
+|   +-- <topic>.zsh            # aliases, options, prompt; sourced in order
 |   +-- secrets.zsh            # load_secret/secret helpers (tracked)
 |   +-- local.zsh              # machine-local + secret wiring (untracked)
 |   +-- functions/<name>       # one autoloaded function per file, named <name>
 |   +-- completions/_<command> # one completion per command
 +-- .config/
 |   +-- git/{config,ignore}    # XDG git config; ~/.gitconfig must not exist
+|   +-- <tool>/                # per-tool XDG config
 |   +-- dotfiles/              # Brewfile, bootstrap.sh, macos.zsh, duti, test/
 +-- .github/workflows/test.yml # CI: restore on a clean runner
++-- .local/bin/                # personal executables, on PATH via .zprofile
 +-- .gitignore                 # a single *; track via git add -f
 ```
 
@@ -116,6 +100,8 @@ $HOME/                         # the repo itself, a non-bare git checkout
   - Prefer deletion; question speculative options, fallbacks, or handling for
     impossible cases.
   - New code should fit the surrounding idiom, not merely work.
+- Consider all of the above **in addition** to the comprehensive review you
+  perform yourself, never in place of it.
 
 Be specific and explain the why; point to the safer pattern, acknowledge good
 ones, and ask when intent is unclear. Then re-check every finding in depth
