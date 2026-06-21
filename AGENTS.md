@@ -30,15 +30,36 @@ at `$HOME`, authored modules under `~/.zsh/`, secret values in the macOS keychai
 
 ## Code Review
 
-Guidance for an automated reviewer on pull requests. This is a personal macOS
-dotfiles tree where `$HOME` is the git repo; weigh these invariants over style
-nits a formatter or linter already catches.
+Philosophy:
 
-Target environment: macOS 26.2+ and zsh 5.9+ only; assume no earlier version
-or other platform. Strongly recommended: before reviewing, read the latest
-authoritative docs for any component a change touches.
+- [DeVault][dv-dot]-style minimal dotfiles: `$HOME` is the repo, `.gitignore`
+  is `*`, files in place, no framework or manager
+- [PoLa][pola]-friendly zsh: a predictable, least-astonishment structure that
+  grows only when earned
 
-Expected layout - protect it, and flag anything that lands elsewhere:
+Target environment: macOS 26.2+ and zsh 5.9+ only.
+
+Tooling: `shellcheck` the POSIX sh (`bootstrap.sh`, `test/*.sh`); `zsh -n` the
+zsh files (shellcheck has no zsh support).
+
+zsh style:
+- prefer builtins, globs (`(N)`), and parameter expansion over `sed`/`cat`/`ls`;
+  use `[[ ]]` for tests and early returns over deep nesting
+- scripts open with `emulate -L zsh` + local `setopt`; quote expansions; favour
+  `print -r --` over `echo`
+
+Before reviewing, read the latest authoritative docs for any component a change
+touches.
+
+Review each affected flow thoroughly, ensuring:
+
+- the dotfiles restore stays in a good working state
+- only generic, dotfiles-relevant items are captured
+- the philosophy and structure are preserved, without fragmenting or churning
+  the conventions
+- all documentation is consistent and up to date
+
+The layout to preserve:
 
 ```text
 $HOME/                         # the repo itself, a non-bare git checkout
@@ -60,53 +81,21 @@ $HOME/                         # the repo itself, a non-bare git checkout
 +-- .gitignore                 # a single *; track via git add -f
 ```
 
-- Secrets come first.
-  - Any secret value, token, or machine-specific line in a tracked file is a
-    finding.
-  - Secrets live in the macOS keychain, wired in untracked `~/.zsh/local.zsh`.
-  - A bare name through `load_secret` is fine; an opaque value is a leak.
-- Tracking is explicit.
-  - Everything is force-added against a `*` ignore, so scrutinise new tracked
-    files.
-  - Machine-local or ephemeral state (history, caches, `.DS_Store`,
-    `local.zsh`) must never be committed.
-- The restore stays idempotent.
-  - `bootstrap.sh` and `macos.zsh` must be safe to re-run and assume no prior
-    state.
-  - A new unguarded destructive or non-idempotent step is a finding;
-    `checkout -f` is deliberate.
-- The shell split holds.
-  - `bootstrap.sh` is POSIX sh, run before anything is installed: flag
-    bashisms or reliance on not-yet-present tools.
-  - `PATH` and `brew shellenv` belong in `.zprofile`.
-  - Prefer modern, standards-first shell over legacy shims; assume the latest
-    OS.
-- Aliases and functions follow convention.
-  - Topic modules are `~/.zsh/<topic>.zsh`, sourced in order; keep them
-    topical, not dumping grounds, and split a module past ~100 lines.
-  - An autoloaded function is `~/.zsh/functions/<name>` defining exactly
-    `<name>`; a completion is `~/.zsh/completions/_<command>`.
-  - Define each alias, function, or export once; flag duplicates and any
-    whose tool is gone (`command -v` fails).
-  - Machine-specific lines belong in `local.zsh`, never a tracked module.
-- Docs stay aligned.
-  - `README.md` and `AGENTS.md` must reflect any change to behaviour, layout,
-    or commands; flag drift between the docs and the code.
-- The contract is protected.
-  - `assert.sh` is the single definition of a working machine.
-  - Flag changes to bootstrap, the Brewfile, the layout, or entry files that
-    weaken or bypass it.
-- Additions earn their place.
-  - Prefer deletion; question speculative options, fallbacks, or handling for
-    impossible cases.
-  - New code should fit the surrounding idiom, not merely work.
-- Consider all of the above **in addition** to the comprehensive review you
-  perform yourself, never in place of it.
+In addition to your own review, consider each of the following:
 
-Be specific and explain the why; point to the safer pattern, acknowledge good
-ones, and ask when intent is unclear. Then re-check every finding in depth
-before posting: each must be real, material, and actionable. Drop anything that
-is filler, a restatement, or a nit the tooling already catches.
+- secrets stay in the macOS keychain, wired in untracked `~/.zsh/local.zsh`; a
+  secret value or machine-local line in a tracked file is a leak
+- `$HOME` is the repo under a `*` ignore: track only via `git add -f`, never
+  history, caches, or other machine-local or ephemeral files
+- `bootstrap.sh` is POSIX sh and stays idempotent; `PATH` and `brew shellenv`
+  belong in `.zprofile`, login-scoped
+- modules are `~/.zsh/<topic>.zsh`, autoloaded `functions/<name>`, completions
+  `~/.zsh/completions/_<command>`; define each thing once
+- `assert.sh` is the single definition of a working machine; do not weaken it
+
+Double-check **each and every finding**: each must be real and material.
+Drop filler, restatements, and nits a formatter already catches.
 
 [dv-dot]: https://drewdevault.com/2019/12/30/dotfiles.html
+[pola]: https://en.wikipedia.org/wiki/Principle_of_least_astonishment
 [tart]: https://tart.run
