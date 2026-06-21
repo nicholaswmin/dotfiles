@@ -21,7 +21,7 @@ test -f ~/.zshenv && test -f ~/.zprofile && test -f ~/.zshrc    || fail "entry f
 
 # storage + git-config invariants
 [ "$(cat ~/.gitignore)" = '*' ]                                 || fail ".gitignore is not exactly *"
-test ! -e ~/.gitconfig                                          || fail "~/.gitconfig present (overrides XDG config)"
+test ! -e "$HOME/.gitconfig"                                    || fail "$HOME/.gitconfig present (overrides XDG config)"
 [ -z "$(git -C "$HOME" config --get core.excludesfile || true)" ] || fail "core.excludesfile is set"
 git -C "$HOME" config --get gpg.format      | grep -qx ssh      || fail "gpg.format not ssh"
 git -C "$HOME" config --get commit.gpgsign  | grep -qx true     || fail "commit signing not enabled"

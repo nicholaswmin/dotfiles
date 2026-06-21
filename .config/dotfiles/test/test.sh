@@ -34,7 +34,9 @@ die() { printf 'error: %s\n' "$*"; printf '%s %s\n' "${_red}error:${_rst}" "$*" 
 command -v tart    >/dev/null 2>&1 || die "tart missing - brew install cirruslabs/cli/tart"
 command -v sshpass >/dev/null 2>&1 || { say "installing sshpass"; brew install sshpass; }
 
+# shellcheck disable=SC2086  # $SSHOPTS expands to multiple flags by design
 run() { sshpass -p admin ssh $SSHOPTS "admin@$IP" "$@"; }
+# shellcheck disable=SC2086  # $SSHOPTS expands to multiple flags by design
 put() { sshpass -p admin scp $SSHOPTS "$1" "admin@$IP:$2"; }
 
 cleanup() {

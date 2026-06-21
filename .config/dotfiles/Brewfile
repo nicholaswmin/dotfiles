@@ -9,6 +9,7 @@ brew "httpie"
 brew "glow"           # markdown in the terminal
 brew "mas"            # Mac App Store CLI
 brew "duti"           # default-app associations
+brew "shellcheck"      # lint POSIX sh: bootstrap, test
 
 # runtimes
 brew "fnm"            # node version manager

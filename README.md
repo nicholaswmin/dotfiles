@@ -24,7 +24,11 @@
 ## restore
 
 assumes [Xcode Command Line Tools][Xcode-tools]; provisions a fresh macOS box
-end-to-end (Homebrew, the repo into `$HOME`, `brew bundle`, macOS `defaults`):
+end-to-end:
+
+- installs `homebrew`
+- checks the repo out into `$HOME`
+- runs `brew bundle` and the macOS `defaults`
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/nicholaswmin/dotfiles/main/.config/dotfiles/bootstrap.sh -o /tmp/bootstrap.sh
@@ -58,7 +62,7 @@ curl -fsS -H "Authorization: Bearer $(secret CLOUDFLARE_GLOBAL_API_TOKEN)" "$api
 
 ## tests
 
-requires [tart][tart-url]:
+requires [tart][tart]:
 
 ```sh
 brew install cirruslabs/cli/tart
@@ -67,4 +71,4 @@ sh .config/dotfiles/test/test.sh
 
 [gh-author]: https://github.com/nicholaswmin
 [Xcode-tools]: https://developer.apple.com/xcode/
-[tart-url]: https://tart.run
+[tart]: https://tart.run

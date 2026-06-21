@@ -1,15 +1,9 @@
 # duti - default-app associations, applied by macos.zsh.
 # Columns: bundle-id  type  role. Leading '.' marks an extension; 'all' = viewer+editor.
 
-# scripts
-dev.zed.Zed .sh   all
-dev.zed.Zed .zsh  all
-dev.zed.Zed .bash all
 
 # javascript / typescript
 dev.zed.Zed .js   all
-dev.zed.Zed .mjs  all
-dev.zed.Zed .cjs  all
 dev.zed.Zed .ts   all
 dev.zed.Zed .tsx  all
 dev.zed.Zed .jsx  all
