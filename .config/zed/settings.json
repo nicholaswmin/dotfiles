@@ -1,0 +1,683 @@
+// ~/.config/zed/settings.jsonc
+{
+  "icon_theme": "Zed (Default)",
+  "diff_view_style": "split",
+  "minimap": {
+    "show": "never"
+  },
+  "which_key": {
+    "enabled": false
+  },
+  "seed_search_query_from_cursor": "never",
+  "proxy": "",
+  "outline_panel": {
+    "dock": "left",
+    "git_status": true
+  },
+  "text_rendering_mode": "grayscale",
+  "completion_menu_scrollbar": "auto",
+  "lsp_highlight_debounce": 100,
+  "document_symbols": "on",
+  "document_folding_ranges": "on",
+  "semantic_tokens": "combined",
+  "completions": {
+    "words_min_length": 2
+  },
+  "drag_and_drop_selection": {
+    "enabled": false
+  },
+  "edit_predictions": {
+    "provider":"copilot",
+    "mode":"eager",
+    "copilot": {
+      "enable_next_edit_suggestions": true
+    }
+  },
+  "session": {
+    "trust_all_worktrees": true,
+    "restore_unsaved_buffers": true
+  },
+  "calls": {
+    "mute_on_join": true
+  },
+  "tab_size": 2,
+  "indent_guides": {
+    "enabled": false
+  },
+  "current_line_highlight": "line",
+  "unnecessary_code_fade": 0.4,
+  "wrap_guides": [
+    80
+  ],
+  "scroll_beyond_last_line": "off",
+  "hide_mouse": "never",
+  "format_on_save": "off",
+  "diagnostics_max_severity": "warning",
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/.sl",
+    "**/.repo",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/lib",
+    "**/lib/**"
+  ],
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "buffer_font_size": 13,
+  "buffer_font_weight": 100,
+  "buffer_font_features": {
+    "kern": true
+  },
+  "ui_font_family": "SF Pro Text",
+  "ui_font_size": 14,
+  "ui_font_weight": 250,
+  "agent_buffer_font_size": 13,
+  "agent_ui_font_size": 15,
+  "languages": {
+    "JavaScript": {
+      "remove_trailing_whitespace_on_save": false,
+      "completions": {
+        "words": "enabled"
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
+    },
+    "HTML": {},
+    "Markdown": {
+      "format_on_save": "off",
+      "use_on_type_format": false,
+      "remove_trailing_whitespace_on_save": false,
+      "allow_rewrap": "anywhere",
+      "soft_wrap": "editor_width",
+      "completions": {
+        "words": "enabled"
+      },
+      "language_servers": [
+        "markdown-language-server"
+      ]
+    }
+  },
+  "lsp": {
+    "biome": {
+      "settings": {}
+    },
+    "vtsls": {
+      "settings": {
+        "javascript": {
+          "format": {
+            "enable": false
+          },
+          "preferences": {
+            "quoteStyle": "single",
+            "importModuleSpecifierEnding": "js"
+          }
+        },
+        "typescript": {
+          "format": {
+            "enable": false
+          },
+          "preferences": {
+            "quoteStyle": "single",
+            "importModuleSpecifierEnding": "js"
+          }
+        }
+      }
+    }
+  },
+  "git": {
+    "gutter_debounce": 120,
+    "inline_blame": {
+      "show_commit_summary": true,
+      "delay_ms": 2000
+    }
+  },
+  "git_panel": {
+    "dock": "left",
+    "show_count_badge": true,
+    "file_icons": true,
+    "tree_view": false
+  },
+  "file_finder": {
+    "modal_max_width": "large",
+    "skip_focus_for_active_in_search": false
+  },
+  "active_pane_modifiers": {
+    "inactive_opacity": 0.7,
+    "border_size": 1
+  },
+  "preview_tabs": {
+    "enable_preview_from_project_panel": false,
+    "enabled": false,
+    "enable_preview_multibuffer_from_code_navigation": true,
+    "enable_preview_from_file_finder": false
+  },
+  "scrollbar": {
+    "axes": {
+      "horizontal": true
+    },
+    "show": "system"
+  },
+  "tabs": {
+    "activate_on_close": "neighbour",
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "off"
+  },
+  "max_tabs": 5,
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": false,
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
+  },
+  "project_panel": {
+    "dock": "left",
+    "git_status_indicator": true,
+    "diagnostic_badges": true,
+    "show_diagnostics": "all",
+    "bold_folder_labels": true,
+    "sticky_scroll": false,
+    "default_width": 300,
+    "auto_reveal_entries": false,
+    "auto_fold_dirs": false
+  },
+  "collaboration_panel": {
+    "dock": "left",
+    "button": false
+  },
+  "debugger": {
+    "button": false
+  },
+  "toolbar": {
+    "code_actions": true,
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false
+  },
+  "status_bar": {
+    "active_encoding_button": "enabled"
+  },
+  "title_bar": {
+    "show_branch_status_icon": true,
+    "show_menus": true
+  },
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
+  },
+  "restore_on_startup": "last_workspace",
+  "when_closing_with_no_tabs": "keep_window_open",
+  "confirm_quit": true,
+  "terminal": {
+    "show_count_badge": true,
+    "alternate_scroll": "off",
+    "copy_on_select": true,
+    "cursor_shape": "bar",
+    "blinking": "on",
+    "font_family": "SF Mono",
+    "font_size": 12,
+    "font_weight": 150,
+    "line_height": "comfortable",
+    "default_height": 400,
+    "option_as_meta": true
+  },
+  "theme": {
+    "mode": "system",
+    "dark": "One Dark Pro Night Flat",
+    "light": "Ayu Light"
+  },
+  "language_models": {
+    "open_router": {
+      "api_url": "https://openrouter.ai/api/v1",
+      "available_models": [
+        {
+          "name": "openai/gpt-5-pro",
+          "display_name": "GPT-5 Pro",
+          "max_tokens": 400000,
+          "max_output_tokens": 40000,
+          "supports_tools": true,
+          "supports_images": true
+        },
+        {
+          "name": "google/gemini-3-pro-preview",
+          "display_name": "Gemini 3 Pro Preview",
+          "max_tokens": 1000000,
+          "supports_tools": true,
+          "supports_images": true
+        },
+        {
+          "name": "openai/gpt-5.2",
+          "display_name": "GPT-5.2",
+          "max_tokens": 400000,
+          "max_output_tokens": 40000,
+          "supports_tools": true,
+          "supports_images": true
+        },
+        {
+          "name": "openai/chatgpt-5.4",
+          "display_name": "ChatGPT 5.4",
+          "max_tokens": 1100000,
+          "max_output_tokens": 40000,
+          "supports_tools": true,
+          "supports_images": true
+        }
+      ]
+    }
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "default_config_options": {
+        "effort": "xhigh",
+        "model": "opus[1m]",
+        "mode": "default"
+      },
+      "type": "registry"
+    },
+    "codex-acp": {
+      "default_config_options": {
+        "model": "gpt-5.4"
+      },
+      "type": "registry",
+      "favorite_config_option_values": {
+        "mode": [
+          "full-access"
+        ],
+        "model": [
+          "gpt-5.4"
+        ]
+      }
+    }
+  },
+  "agent": {
+    "limit_content_width": false,
+    "max_content_width": 1.0,
+    "button": true,
+    "dock": "left",
+    "single_file_review": true,
+    "default_profile": "write",
+    "tool_permissions": {
+      "default": "allow"
+    },
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-5.4",
+        "enable_thinking": false
+      },
+      {
+        "provider": "openrouter",
+        "model": "openai/gpt-5.4",
+        "enable_thinking": false
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-3.1-pro-preview",
+        "enable_thinking": false
+      }
+    ],
+    "profiles": {
+      "write-lite": {
+        "name": "Write-lite",
+        "tools": {
+          "search_web": true,
+          "copy_path": true,
+          "create_directory": true,
+          "delete_path": true,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "project_notifications": false,
+          "move_path": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "restore_file_from_disk": true,
+          "save_file": true,
+          "open": true,
+          "grep": true,
+          "spawn_agent": true,
+          "terminal": true,
+          "thinking": true,
+          "update_plan": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {
+          "mcp-server-sequential-thinking": {
+            "tools": {
+              "sequentialthinking": false
+            }
+          },
+          "github": {
+            "tools": {
+              "update_pull_request_branch": false,
+              "update_pull_request": false,
+              "sub_issue_write": false,
+              "search_users": false,
+              "search_repositories": false,
+              "search_pull_requests": false,
+              "search_issues": false,
+              "request_copilot_review": false,
+              "search_code": false,
+              "push_files": false,
+              "pull_request_review_write": false,
+              "merge_pull_request": false,
+              "pull_request_read": false,
+              "list_tags": false,
+              "list_releases": false,
+              "list_pull_requests": false,
+              "list_issue_types": false,
+              "list_branches": false,
+              "list_commits": false,
+              "list_issues": false,
+              "issue_write": false,
+              "issue_read": false,
+              "get_teams": false,
+              "get_team_members": false,
+              "get_tag": false,
+              "get_me": false,
+              "get_release_by_tag": false,
+              "get_label": false,
+              "get_file_contents": false,
+              "get_latest_release": false,
+              "get_commit": false,
+              "fork_repository": false,
+              "delete_file": false,
+              "add_issue_comment": true,
+              "create_repository": false,
+              "create_pull_request": false,
+              "create_or_update_file": false,
+              "create_branch": false,
+              "assign_copilot_to_issue": false,
+              "add_reply_to_pull_request_comment": false,
+              "add_comment_to_pending_review": false
+            }
+          },
+          "playwright": {
+            "tools": {
+              "browser_click": true
+            }
+          }
+        },
+        "default_model": {
+          "provider": "openrouter",
+          "model": "openai/gpt-5.4",
+          "enable_thinking": true
+        }
+      },
+      "write": {
+        "context_servers": {
+          "mcp-server-sequential-thinking": {
+            "tools": {
+              "sequentialthinking": true
+            }
+          },
+          "github": {
+            "tools": {
+              "update_pull_request_branch": false,
+              "update_pull_request": false,
+              "sub_issue_write": false,
+              "search_users": false,
+              "search_repositories": false,
+              "search_pull_requests": false,
+              "search_issues": false,
+              "request_copilot_review": false,
+              "search_code": false,
+              "push_files": false,
+              "pull_request_review_write": false,
+              "merge_pull_request": false,
+              "pull_request_read": false,
+              "list_tags": false,
+              "list_releases": false,
+              "list_pull_requests": false,
+              "list_issue_types": false,
+              "list_branches": false,
+              "list_commits": false,
+              "list_issues": false,
+              "issue_write": false,
+              "issue_read": false,
+              "get_teams": false,
+              "get_team_members": false,
+              "get_tag": false,
+              "get_me": false,
+              "get_release_by_tag": false,
+              "get_label": false,
+              "get_file_contents": false,
+              "get_latest_release": false,
+              "get_commit": false,
+              "fork_repository": false,
+              "delete_file": false,
+              "add_issue_comment": true,
+              "create_repository": false,
+              "create_pull_request": false,
+              "create_or_update_file": false,
+              "create_branch": false,
+              "assign_copilot_to_issue": false,
+              "add_reply_to_pull_request_comment": false,
+              "add_comment_to_pending_review": false
+            }
+          },
+          "playwright": {
+            "tools": {
+              "browser_click": true
+            }
+          }
+        },
+        "default_model": {
+          "enable_thinking": true,
+          "provider": "openrouter",
+          "model": "openai/gpt-5.4"
+        },
+        "name": "Write",
+        "tools": {
+          "search_web": true,
+          "copy_path": true,
+          "create_directory": true,
+          "delete_path": true,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "project_notifications": false,
+          "move_path": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "restore_file_from_disk": true,
+          "save_file": true,
+          "open": true,
+          "grep": true,
+          "spawn_agent": true,
+          "terminal": true,
+          "thinking": true
+        },
+        "enable_all_context_servers": true
+      }
+    },
+    "message_editor_min_lines": 10,
+    "enable_feedback": false,
+    "default_width": 360,
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude-opus-4.7"
+    },
+    "use_modifier_to_send": true,
+    "play_sound_when_agent_done": "always",
+    "default_model": {
+      "effort": "xhigh",
+      "enable_thinking": true,
+      "provider": "openai-subscribed",
+      "model": "gpt-5.4"
+    }
+  },
+  "context_servers": {
+    "chrome-devtools-mcp-zed": {
+      "enabled": false,
+      "remote": false,
+      "settings": {}
+    },
+    "mcp-server-brave-search": {
+      "enabled": false
+    },
+    "brave-search": {
+      "enabled": true,
+      "command": "/Users/nicholaswmin/.local/bin/brave-search-mcp-server-wrapper",
+      "env": {}
+    },
+    "github": {
+      "enabled": false,
+      "command": "/Users/nicholaswmin/.local/bin/github-mcp-server-wrapper",
+      "args": [
+        "stdio"
+      ],
+      "env": {}
+    },
+    "playwright": {
+      "enabled": false,
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--browser=webkit",
+        "--caps=vision,pdf,testing,tracing",
+        "--viewport-size=1280x720",
+        "--ignore-https-errors",
+        "--console-level=info"
+      ],
+      "env": {}
+    }
+  },
+  "experimental.theme_overrides": {
+    "background": "#121212",
+    "elevated_surface.background": "#121212",
+    "surface.background": "#121212",
+    "element.background": "#121212",
+    "element.hover": "#1F1F1Fff",
+    "element.active": "#2A2A2Aff",
+    "element.selected": "#252525ff",
+    "ghost_element.hover": "#1F1F1Fff",
+    "ghost_element.active": "#2A2A2Aff",
+    "ghost_element.selected": "#252525ff",
+    "panel.background": "#121212",
+    "panel.focused_border": "#FFFAF54D",
+    "pane.focused_border": "#FFFAF54D",
+    "editor.background": "#121212",
+    "editor.gutter.background": "#121212",
+    "editor.subheader.background": "#121212",
+    "editor.active_line.background": "#121212",
+    "editor.highlighted_line.background": "#121212",
+    "status_bar.background": "#121212",
+    "title_bar.background": "#121212",
+    "title_bar.inactive_background": "#121212",
+    "toolbar.background": "#121212",
+    "tab_bar.background": "#0C0C0C",
+    "tab.inactive_background": "#0C0C0C",
+    "tab.active_background": "#1A1A1A",
+    "terminal.background": "#121212",
+    "border": "#FFFAF522",
+    "border.variant": "#282726ff",
+    "border.focused": "#FFFAF54D",
+    "border.selected": "#FFFAF540",
+    "border.disabled": "#202020ff",
+    "scrollbar.track.border": "#FFFFFF19",
+    "scrollbar.thumb.background": "#2a2a2a33",
+    "scrollbar.thumb.hover_background": "#3a3a3aff",
+    "scrollbar.thumb.border": "#FFFFFF19",
+    "text": "#F5F5F0",
+    "text.muted": "#A0A09B",
+    "text.placeholder": "#6B6B68",
+    "text.disabled": "#4A4A48",
+    "text.accent": "#D0D0CB",
+    "icon": "#F5F5F0",
+    "icon.muted": "#A0A09B",
+    "icon.placeholder": "#6B6B68",
+    "icon.disabled": "#4A4A48",
+    "version_control.added": "#A0E0B0",
+    "version_control.modified": "#E8D890",
+    "version_control.deleted": "#E8A0A8",
+    "created": "#A0E0B0",
+    "created.background": "#A0E0B01a",
+    "created.border": "#A0E0B03d",
+    "modified": "#E8D890",
+    "modified.background": "#E8D8901a",
+    "modified.border": "#E8D8903d",
+    "deleted": "#E8A0A8",
+    "deleted.background": "#E8A0A81a",
+    "deleted.border": "#E8A0A83d",
+    "syntax": {
+      "enum": {
+        "color": "#D0C4A8"
+      },
+      "property": {
+        "color": "#D0C4A8"
+      },
+      "punctuation.list_marker": {
+        "color": "#D0C4A8"
+      },
+      "punctuation.markup": {
+        "color": "#D0C4A8"
+      },
+      "punctuation.special": {
+        "color": "#C8B896"
+      },
+      "title": {
+        "color": "#D0C4A8"
+      }
+    }
+  },
+  "profiles": {
+    "Current (Accent Strip)": {
+      "settings": {
+        "active_pane_modifiers": {
+          "border_size": 2
+        },
+        "experimental.theme_overrides": {
+          "panel.focused_border": "#FFFFFFB3",
+          "pane.focused_border": "#FFFFFFB3",
+          "border.focused": "#FFFFFFB3",
+          "border.selected": "#FFFFFF80"
+        }
+      }
+    },
+    "Original": {
+      "settings": {
+        "active_pane_modifiers": {
+          "border_size": -1
+        },
+        "experimental.theme_overrides": {
+          "border.focused": "#3a3a3aff",
+          "border.selected": "#3a3a3aff"
+        }
+      }
+    },
+    "High Contrast Borders": {
+      "settings": {
+        "active_pane_modifiers": {
+          "border_size": 3
+        },
+        "experimental.theme_overrides": {
+          "panel.focused_border": "#FFFFFFDD",
+          "pane.focused_border": "#FFFFFFDD",
+          "border.focused": "#FFFFFFDD",
+          "border.selected": "#FFFFFFAA"
+        }
+      }
+    }
+  }
+}

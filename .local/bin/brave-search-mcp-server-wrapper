@@ -1,0 +1,5 @@
+#!/bin/bash
+export PATH="/opt/homebrew/bin:$PATH"
+eval "$(fnm env 2>/dev/null)" 2>/dev/null
+export BRAVE_API_KEY="$(security find-generic-password -s brave -w "$HOME/Library/Keychains/environment.keychain-db" 2>/dev/null)"
+exec npx -y @brave/brave-search-mcp-server --transport stdio "$@"
