@@ -18,15 +18,11 @@ LOG="${TMPDIR:-/tmp}/dotfiles-bootstrap-$(date +%Y%m%d-%H%M%S).log"
 exec 3>&2
 exec >>"$LOG" 2>&1
 
-if   [ -n "${NO_COLOR+x}" ];                 then _color=0
-elif [ "${CLICOLOR_FORCE:-0}" != 0 ];        then _color=1
-elif [ "${CLICOLOR:-1}" != 0 ] && [ -t 3 ];  then _color=1
-else                                              _color=0
-fi
-if [ "$_color" = 1 ]; then
-  _grn=$(printf '\033[1;32m'); _red=$(printf '\033[1;31m'); _rst=$(printf '\033[0m')
-else
-  _grn=''; _red=''; _rst=''
+_grn='' _red='' _rst=''
+if [ -z "${NO_COLOR+x}" ] &&
+   { [ "${CLICOLOR_FORCE:-0}" != 0 ] || { [ "${CLICOLOR:-1}" != 0 ] && [ -t 3 ]; }; }
+then
+  _grn=$(printf '\033[1;32m') _red=$(printf '\033[1;31m') _rst=$(printf '\033[0m')
 fi
 
 say() { printf '==> %s\n' "$*"; printf '%s %s\n' "${_grn}==>${_rst}"   "$*" >&3; }
