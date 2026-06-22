@@ -1,18 +1,16 @@
 #!/usr/bin/env sh
-# bootstrap - restore nicholaswmin/dotfiles onto a fresh macOS machine
-# posix sh, idempotent; afterwards it is plain git from $HOME
-# override the source with DOTFILES_REPO / DOTFILES_REF
+# bootstrap - restore nicholaswmin/dotfiles onto a fresh macOS box
 
 set -eu
 
-
 # source
+# ---
 
 REPO="${DOTFILES_REPO:-https://github.com/nicholaswmin/dotfiles}"
 REF="${DOTFILES_REF:-main}"
 
-
 # logging
+# ---
 
 LOG="${TMPDIR:-/tmp}/dotfiles-bootstrap-$(date +%Y%m%d-%H%M%S).log"
 exec 3>&2
@@ -28,13 +26,13 @@ fi
 say() { printf '==> %s\n' "$*"; printf '%s %s\n' "${_grn}==>${_rst}"   "$*" >&3; }
 die() { printf 'error: %s\n' "$*"; printf '%s %s\n' "${_red}error:${_rst}" "$*" >&3; exit 1; }
 
-
 # git
+# ---
 
 command -v git >/dev/null 2>&1 || die "git missing - run 'xcode-select --install' first"
 
-
 # homebrew
+# ---
 
 if ! command -v brew >/dev/null 2>&1 && [ ! -x /opt/homebrew/bin/brew ]; then
   say "installing Homebrew"
@@ -44,8 +42,8 @@ if ! command -v brew >/dev/null 2>&1 && [ ! -x /opt/homebrew/bin/brew ]; then
 fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-
 # checkout into $HOME
+# ---
 
 cd "$HOME"
 [ -d .git ] || { say "git init in \$HOME"; git init -q; }
@@ -61,8 +59,8 @@ say "checkout -f (overwrites colliding stock files)"
 git checkout -f -B main FETCH_HEAD
 rm -f "$HOME/.gitconfig"
 
-
 # provision
+# ---
 
 say "brew bundle"
 brew bundle --file "$HOME/.config/dotfiles/Brewfile" || _bundle_failed=1
@@ -70,14 +68,14 @@ say "macos defaults"
 zsh "$HOME/.config/dotfiles/macos.zsh"
 if [ "${_bundle_failed:-0}" = 1 ]; then die "brew bundle had failures - see $LOG"; fi
 
-
 # node
+# ---
 
 say "node"
 fnm install 26
 fnm default 26
 
-
 # done
+# ---
 
 say "done - restart your shell:  exec zsh -l"
