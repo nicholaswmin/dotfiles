@@ -48,8 +48,7 @@ mint the local stuff; mainly logins:
 - ssh + signing key at `~/.ssh/id_ed25519_signing.pub`, added to GitHub
 - `gh auth login`
 - `aws` and `cloudflared` logins
-- create the `environment` keychain, add keys like `brave`
-- `fnm install --lts && fnm default lts-latest`
+- create the `environment` keychain, add your keys
 
 ## daily driving
 
