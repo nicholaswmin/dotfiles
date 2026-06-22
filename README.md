@@ -1,29 +1,33 @@
 # dotfiles
 
-[nicholaswmin][gh-author] macOS config; in git, in place, no symlinks.
+[nicholaswmin][gh-author] macOS config
 
-## layout
+- repo sits at `$HOME`
+- no dotfiles managers, no fancy commands, just `git *`
+- min. architecture `.zsh`, conventional locations
 
-`$HOME` is the repo; files sit in place, the rest is XDG.
+the rest is [XDG][xdg-spec].
 
-```text
+```sh
 ~/
-+-- .gitignore        a single line: *
-+-- .zshenv           read first; env, not PATH
-+-- .zprofile         login; PATH + brew shellenv
-+-- .zshrc            interactive; sources ~/.zsh/, then local.zsh
-+-- .zsh/             *.zsh modules + functions/ + completions/
-|   +-- secrets.zsh   load_secret/secret helpers
-|   +-- local.zsh     untracked; machine-local + secrets, last
++-- .gitignore        # ignore all (*)
++-- .zshenv           # env, not PATH
++-- .zprofile         # login; PATH + brew shellenv
++-- .zshrc            # interactive; sources ~/.zsh/ then local.zsh
++-- .zsh/             # *.zsh modules, functions, completions
+|   +-- secrets.zsh   # load_secret/secret keychain helpers
+|   +-- local.zsh     # untracked; machine-local secrets
 +-- .config/
-|   +-- git/          config, ignore
-|   +-- dotfiles/     Brewfile, bootstrap.sh, macos.zsh, duti, test/
-+-- .local/bin/       executables
+|   +-- git/          # config, ignore
+|   +-- dotfiles/     # Brewfile, bootstrap.sh, macos.zsh, duti, test/
++-- .local/bin/       # executables
 ```
 
 ## restore
 
-needs [Xcode Command Line Tools][xcode]. then:
+needs [Xcode Command Line Tools][xcode]. 
+
+then:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/nicholaswmin/dotfiles/main/.config/dotfiles/bootstrap.sh -o /tmp/bootstrap.sh
@@ -31,12 +35,15 @@ sh /tmp/bootstrap.sh
 exec zsh -l
 ```
 
-installs homebrew, checks the repo into `$HOME`, runs `brew bundle` and macOS
-`defaults`. checkout overwrites colliding stock files, so back up first.
+1. installs homebrew
+2. checks the repo into `$HOME`
+3. runs `brew bundle` and macOS `defaults`. 
 
-## after
+> **note:** overwrites colliding files, so grab a backup first.
 
-bootstrap skips anything secret or machine-bound. on a fresh box:
+### post-restore
+
+mint the local stuff; mainly logins:
 
 - ssh + signing key at `~/.ssh/id_ed25519_signing.pub`, added to GitHub
 - `gh auth login`
@@ -44,24 +51,27 @@ bootstrap skips anything secret or machine-bound. on a fresh box:
 - create the `environment` keychain, add keys like `brave`
 - `fnm install --lts && fnm default lts-latest`
 
-## tracking
+## daily driving
 
-everything in `$HOME` is ignored; force-add what to track. `git ls-files` is
-the manifest.
+everything in `$HOME` is ignored.
+
+- force-add what to track. 
+- `git ls-files` is the manifest.
 
 ```sh
 git add -f ~/.config/foo
 git commit -m "feat: track foo"
+git push
 ```
 
-## secrets
+### secrets
 
-secrets live in the macOS keychain, never in the repo; wire them in untracked
-`~/.zsh/local.zsh`.
+secrets live in the macOS keychain; never in the repo.  
+Wire them in untracked `~/.zsh/local.zsh`:
 
 ```sh
-load_secret OPENROUTER_API_KEY openrouter
-curl -fsS -H "Authorization: Bearer $(secret CLOUDFLARE_API_TOKEN)" "$api"
+load_secret FOO_API_KEY ACME
+curl -fsS -H "Authorization: Bearer $(secret FOO_API_KEY)" "$api"
 ```
 
 ## tests
@@ -73,6 +83,7 @@ brew install cirruslabs/cli/tart
 sh .config/dotfiles/test/test.sh
 ```
 
+[xdg-spec]: https://specifications.freedesktop.org/basedir/latest/
 [gh-author]: https://github.com/nicholaswmin
 [xcode]: https://developer.apple.com/xcode/
 [tart]: https://tart.run
