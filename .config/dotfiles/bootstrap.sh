@@ -5,13 +5,11 @@ set -eu
 
 # source
 # ---
-
 REPO="${DOTFILES_REPO:-https://github.com/nicholaswmin/dotfiles}"
 REF="${DOTFILES_REF:-main}"
 
 # logging
 # ---
-
 LOG="${TMPDIR:-/tmp}/dotfiles-bootstrap-$(date +%Y%m%d-%H%M%S).log"
 exec 3>&2
 exec >>"$LOG" 2>&1
@@ -28,12 +26,10 @@ die() { printf 'error: %s\n' "$*"; printf '%s %s\n' "${_red}error:${_rst}" "$*" 
 
 # git
 # ---
-
 command -v git >/dev/null 2>&1 || die "git missing - run 'xcode-select --install' first"
 
 # homebrew
 # ---
-
 if ! command -v brew >/dev/null 2>&1 && [ ! -x /opt/homebrew/bin/brew ]; then
   say "installing Homebrew"
   sudo -v
@@ -41,10 +37,10 @@ if ! command -v brew >/dev/null 2>&1 && [ ! -x /opt/homebrew/bin/brew ]; then
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
+command -v brew >/dev/null 2>&1 || die "Homebrew not on PATH after install - see $LOG"
 
 # checkout into $HOME
 # ---
-
 cd "$HOME"
 [ -d .git ] || { say "git init in \$HOME"; git init -q; }
 [ "$(git rev-parse --show-toplevel)" = "$HOME" ] || die "worktree root is not \$HOME"
@@ -61,21 +57,19 @@ rm -f "$HOME/.gitconfig"
 
 # provision
 # ---
-
 say "brew bundle"
 brew bundle --file "$HOME/.config/dotfiles/Brewfile" || _bundle_failed=1
 say "macos defaults"
-zsh "$HOME/.config/dotfiles/macos.zsh"
+zsh "$HOME/.config/dotfiles/macos.zsh" || _macos_failed=1
 if [ "${_bundle_failed:-0}" = 1 ]; then die "brew bundle had failures - see $LOG"; fi
+if [ "${_macos_failed:-0}" = 1 ]; then die "macos defaults had failures - see $LOG"; fi
 
 # node
 # ---
-
 say "node"
 fnm install 26
 fnm default 26
 
 # done
 # ---
-
 say "done - restart your shell:  exec zsh -l"

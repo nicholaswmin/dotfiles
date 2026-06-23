@@ -1,7 +1,5 @@
-# aliases.zsh
-
 # file listing
-alias t='tree -C -L 2 -I "node_modules|bower_components|.git" --dirsfirst -a -F'
+alias t=tree
 alias tree='tree -C -L 2 -I "node_modules|bower_components|.git" --dirsfirst -a -F'
 alias ls='ls -Atr --color=auto --time=birth'
 

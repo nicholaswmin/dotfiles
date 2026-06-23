@@ -1,0 +1,98 @@
+name: docs
+on:
+  push:
+    branches: [main]
+    paths: [README.md, .github/workflows/docs.yml]
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+      - name: render README into site/index.html
+        run: |
+          mkdir -p site
+          cat > style.html <<'CSS'
+          <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+          <meta name="theme-color" content="#1a1917" media="(prefers-color-scheme: dark)">
+          <style>
+          :root {
+            color-scheme: light dark;
+            --bg:    light-dark(#faf8f5, #1a1917);
+            --fg:    light-dark(#26231f, #e7e3db);
+            --muted: light-dark(#6f6a62, #9a958b);
+            --rule:  light-dark(#e8e3db, #312f2b);
+            --code:  light-dark(#f1ece4, #26241f);
+            --link: #007AFF;     /* fallback */
+            --link: AccentColor; /* follows OS accent */
+          }
+          html { font-size: 19px; background: var(--bg); }
+          body {
+            max-width: 80ch; margin: 5rem auto 7rem; padding: 0 2rem;
+            font: 1rem/1.65 ui-serif, "New York", Georgia, serif;
+            background: var(--bg); color: var(--fg);
+            -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+          }
+          h1, h2, h3 {
+            font-family: -apple-system, ui-sans-serif, system-ui, sans-serif;
+            font-weight: 600; line-height: 1.25; letter-spacing: -.012em; margin: 2.6rem 0 .7rem;
+          }
+          h1 { font-size: 1.95rem; margin-top: 0; }
+          h2 { font-size: 1.35rem; padding-bottom: .3rem; border-bottom: 1px solid var(--rule); }
+          h3 { font-size: 1.06rem; color: var(--muted); }
+          a {
+            color: var(--link); text-decoration: none;
+            border-bottom: 1px solid color-mix(in srgb, var(--link) 35%, transparent);
+            &:visited { color: var(--link); }
+            &:hover { border-bottom-color: var(--link); }
+            &:has(img) { border-bottom: 0; }
+          }
+          code {
+            font: .84em ui-monospace, "SF Mono", Menlo, monospace;
+            background: var(--code); padding: .12em .36em; border-radius: 1px;
+          }
+          pre {
+            background: var(--code); padding: 1rem 1.15rem; border-radius: 1px;
+            line-height: 1.5; overflow-x: auto;
+            & code { background: none; padding: 0; font-size: .82rem; }
+          }
+          blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 2px solid var(--rule); color: var(--muted); }
+          hr { border: 0; border-top: 1px solid var(--rule); margin: 2.6rem 0; }
+          ul { padding-left: 1.2rem; }
+          li { margin: .25rem 0; & > ul { margin-top: .25rem; } }
+          #title-block-header { display: none; }
+          .cmt { color: var(--muted); font-style: italic; }
+          </style>
+          CSS
+          pandoc README.md -s --syntax-highlighting=none \
+            --include-in-header style.html \
+            --metadata title="dotfiles" -o site/index.html
+          perl -0777 -i -pe 's{(<pre[^>]*>)(.*?)(</pre>)}{ my($a,$b,$c)=($1,$2,$3); $b=~s{(#[^\n<]*)}{<span class="cmt">$1</span>}g; "$a$b$c" }ges' site/index.html
+          touch site/.nojekyll
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

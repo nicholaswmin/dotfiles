@@ -1,10 +1,13 @@
 # Brewfile, basics
 # The Xcode Command Line Tools are a prerequisite; not installed here.
 
+# adopt apps already in /Applications instead of failing the cask install
+cask_args adopt: true
+
 # shell + cli
-brew "coreutils"      # GNU coreutils (PATH adds its gnubin)
+brew "coreutils"      # GNU coreutils
 brew "tree"
-brew "fd"             # fast find (the fd function)
+brew "fd"             # fast find
 brew "gh"             # GitHub CLI
 brew "httpie"
 brew "glow"           # markdown in the terminal
@@ -23,20 +26,27 @@ brew "postgresql@18"
 # cloud + media
 brew "awscli"
 brew "ffmpeg"
-brew "cloudflared"   # tunnels (the tunnel function)
+brew "cloudflared"   # Cloudflare Tunnel
 brew "heroku"        # heroku CLI
 brew "kubernetes-cli" # kubectl
-brew "shpotify"      # spotify CLI (the spotify function)
+brew "shpotify"      # spotify CLI
 
 # ai clis
 cask "codex"          # OpenAI Codex CLI
 cask "claude-code"    # Claude Code CLI
 
 # apps
-cask "zed"            # editor (EDITOR + default for code files)
+cask "zed"            # editor, EDITOR, default for code files
 cask "claude"         # Claude desktop
 cask "chatgpt"        # ChatGPT desktop
 cask "google-chrome"
 cask "docker-desktop"
 cask "slack"
 cask "spotify"
+
+# fonts
+cask "font-fira-code-nerd-font" # FiraCode Nerd Font Mono (Zed editor font)
+cask "font-sf-pro"              # Apple SF Pro (Zed ui_font_family)
+cask "font-sf-compact"         # Apple SF Compact
+cask "font-sf-mono"            # Apple SF Mono (Zed terminal panel)
+cask "font-new-york"           # Apple New York (NY serif)

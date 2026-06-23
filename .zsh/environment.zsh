@@ -1,5 +1,4 @@
-# environment.zsh
-# interactive environment variables (EDITOR + XDG live in .zshenv)
+# EDITOR and XDG live in .zshenv
 
 export HOMEBREW_NO_ENV_HINTS=1
 export PROJECTS_DIR="${PROJECTS_DIR:-$HOME/Projects}"

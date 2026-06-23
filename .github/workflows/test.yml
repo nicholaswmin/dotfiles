@@ -14,7 +14,9 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
+      - name: remove runner-preinstalled apps that collide with Brewfile casks
+        run: rm -rf "/Applications/Google Chrome.app"
       - name: restore this commit on the runner twice (idempotent), then assert
         env:
           DOTFILES_REPO: ${{ github.server_url }}/${{ github.repository }}

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
-# macos.zsh - apply macOS defaults after brew bundle: Finder, Terminal, Dock,
-# Spotlight, and Zed file associations. Idempotent; missing apps are skipped.
+# macos.zsh - apply macOS defaults + app setup after brew bundle.
+# Idempotent; missing apps are skipped.
 emulate -L zsh
 setopt err_exit pipe_fail
 say() { print -u2 -r -- "==> $*"; }
@@ -18,6 +18,42 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 killall Finder 2>/dev/null || true
 
+# Keyboard - fast repeat, full keyboard access
+say keyboard
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Trackpad - tap to click + corner secondary-click; both built-in (laptop) and
+# Magic (Bluetooth) domains so it restores on any Mac. Scroll dir is global.
+say trackpad
+for d in com.apple.AppleMultitouchTrackpad \
+         com.apple.driver.AppleBluetoothMultitouch.trackpad
+do
+  defaults write $d Clicking -bool true
+  defaults write $d TrackpadRightClick -bool true
+  defaults write $d TrackpadCornerSecondaryClick -int 2
+done
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Text input - disable smart substitutions and auto-correct
+say text
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Screenshots - png to ~/Desktop, no window shadow
+say screenshots
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+defaults write com.apple.screencapture type -string png
+defaults write com.apple.screencapture disable-shadow -bool true
+killall SystemUIServer 2>/dev/null || true
+
 # Terminal - strip title clutter
 say terminal
 for k in ShowActiveProcessInTitle ShowActiveProcessArgumentsInTitle \
@@ -28,6 +64,19 @@ for k in ShowActiveProcessInTitle ShowActiveProcessArgumentsInTitle \
 do
   defaults write com.apple.Terminal $k -bool false
 done
+
+# Terminal theme - import the One Dark profile, set it default + startup.
+# Import needs the GUI, so skip under CI; the defaults below are harmless there.
+say "terminal theme"
+if [[ -z "${CI:-}" ]] && ! defaults read com.apple.Terminal "Window Settings" 2>/dev/null | grep -q "OneDark ="; then
+  open "${0:A:h}/onedark.terminal" || say "terminal theme import skipped"
+  for _ in {1..10}; do
+    defaults read com.apple.Terminal "Window Settings" 2>/dev/null | grep -q "OneDark =" && break
+    sleep 0.5
+  done
+fi
+defaults write com.apple.Terminal "Default Window Settings" -string OneDark
+defaults write com.apple.Terminal "Startup Window Settings" -string OneDark
 
 # Dock - pin installed apps, skip any that are absent
 say dock
@@ -48,15 +97,7 @@ for app in $dock; do
 done
 killall Dock 2>/dev/null || true
 
-# Spotlight - exclude the projects dir
-say spotlight
-proj=${PROJECTS_DIR:-$HOME/Projects}
-if [[ -d $proj ]] && ! defaults read com.apple.Spotlight Exclusions 2>/dev/null | grep -qF "$proj"; then
-  defaults write com.apple.Spotlight Exclusions -array-add "$proj"
-  killall mds 2>/dev/null || true
-fi
-
-# Editor - Zed as default for code files (associations in the sibling `duti` file).
+# Editor: Zed as the default for code files. Associations live in the sibling `duti` file.
 # Skipped under CI - GitHub runners do not honour LaunchServices handler changes.
 say editor
 if [[ -z "${CI:-}" ]] && command -v duti >/dev/null; then

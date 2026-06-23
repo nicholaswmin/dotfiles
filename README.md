@@ -2,30 +2,34 @@
 
 [nicholaswmin][gh-author] macOS config
 
-- repo sits at `$HOME`
-- no dotfiles managers, no fancy commands, just `git *`
-- min. architecture `.zsh`, conventional locations
+[![test][test-badge]][test-runs] [![docs][docs-badge]][docs-runs]
 
-the rest is [XDG][xdg-spec].
+- repo is `$HOME`
+- no managers, no fancy commands, just `git *`
+- minimal `.zsh`, conventional [XDG][xdg-spec] locations
 
-```sh
+```text
 ~/
-+-- .gitignore        # ignore all (*)
++-- .gitignore        # ignore all via *
 +-- .zshenv           # env, not PATH
 +-- .zprofile         # login; PATH + brew shellenv
 +-- .zshrc            # interactive; sources ~/.zsh/ then local.zsh
-+-- .zsh/             # *.zsh modules, functions, completions
++-- .zsh/             # *.zsh modules
 |   +-- secrets.zsh   # load_secret/secret keychain helpers
 |   +-- local.zsh     # untracked; machine-local secrets
 +-- .config/
 |   +-- git/          # config, ignore
-|   +-- dotfiles/     # Brewfile, bootstrap.sh, macos.zsh, duti, test/
+|   +-- dotfiles/     # restore + setup
 +-- .local/bin/       # executables
 ```
 
 ## restore
 
-needs [Xcode Command Line Tools][xcode]. 
+ensure you have [Xcode Command Line Tools][xcode-clt]:
+
+```sh
+xcode-select --install
+```
 
 then:
 
@@ -35,9 +39,9 @@ sh /tmp/bootstrap.sh
 exec zsh -l
 ```
 
-1. installs homebrew
+1. installs Homebrew
 2. checks the repo into `$HOME`
-3. runs `brew bundle` and macOS `defaults`. 
+3. runs `brew bundle` and macOS `defaults`
 
 > **note:** overwrites colliding files, so grab a backup first.
 
@@ -49,13 +53,18 @@ mint the local stuff; mainly logins:
 - `gh auth login`
 - `aws` and `cloudflared` logins
 - create the `environment` keychain, add your keys
+- Spotlight in System Settings:
+  - Search Results: keep only Documents + Files & Folders
+  - Search Privacy: exclude `~/Projects`
 
 ## daily driving
 
-everything in `$HOME` is ignored.
+all in `$HOME` ignored, opt-in deliberately.
 
-- force-add what to track. 
-- `git ls-files` is the manifest.
+### tracking files
+
+- force-add what to track
+- `git ls-files` is the manifest
 
 ```sh
 git add -f ~/.config/foo
@@ -63,19 +72,19 @@ git commit -m "feat: track foo"
 git push
 ```
 
-### secrets
+### managing secrets
 
 secrets live in the macOS keychain; never in the repo.  
 Wire them in untracked `~/.zsh/local.zsh`:
 
 ```sh
 load_secret FOO_API_KEY ACME
-curl -fsS -H "Authorization: Bearer $(secret FOO_API_KEY)" "$api"
+curl -fsS -H "Authorization: Bearer $FOO_API_KEY" "$api"
 ```
 
 ## tests
 
-needs [tart][tart].
+needs [Tart][tart].
 
 ```sh
 brew install cirruslabs/cli/tart
@@ -84,5 +93,9 @@ sh .config/dotfiles/test/test.sh
 
 [xdg-spec]: https://specifications.freedesktop.org/basedir/latest/
 [gh-author]: https://github.com/nicholaswmin
-[xcode]: https://developer.apple.com/xcode/
+[xcode-clt]: https://developer.apple.com/xcode/resources/
 [tart]: https://tart.run
+[test-badge]: https://github.com/nicholaswmin/dotfiles/actions/workflows/test.yml/badge.svg
+[test-runs]: https://github.com/nicholaswmin/dotfiles/actions/workflows/test.yml
+[docs-badge]: https://github.com/nicholaswmin/dotfiles/actions/workflows/docs.yml/badge.svg
+[docs-runs]: https://github.com/nicholaswmin/dotfiles/actions/workflows/docs.yml

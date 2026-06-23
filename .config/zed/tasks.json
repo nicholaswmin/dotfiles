@@ -4,7 +4,7 @@
     "command": "sh",
     "args": [
       "-c",
-      "pkill -f 'serve -l 5111' 2>/dev/null; npx --yes serve@latest -l 5111 . & pid=$!; until curl -fsS http://localhost:5111 >/dev/null; do sleep 0.1; done; open http://localhost:5111; wait $pid"
+      "pkill -f 'serve -l 5111' 2>/dev/null; npx --yes serve@latest -l 5111 . & pid=$!; for i in $(seq 1 50); do curl -fsS http://localhost:5111 >/dev/null && break; sleep 0.1; done; open http://localhost:5111; wait $pid"
     ],
     "cwd": "$ZED_WORKTREE_ROOT",
     "use_new_terminal": false,

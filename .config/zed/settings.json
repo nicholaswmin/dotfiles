@@ -1,18 +1,8 @@
-// ~/.config/zed/settings.jsonc
+// ~/.config/zed/settings.json
 {
-  "icon_theme": "Zed (Default)",
-  "diff_view_style": "split",
-  "minimap": {
-    "show": "never"
-  },
-  "which_key": {
-    "enabled": false
-  },
   "seed_search_query_from_cursor": "never",
-  "proxy": "",
   "outline_panel": {
-    "dock": "left",
-    "git_status": true
+    "dock": "left"
   },
   "text_rendering_mode": "grayscale",
   "completion_menu_scrollbar": "auto",
@@ -27,15 +17,10 @@
     "enabled": false
   },
   "edit_predictions": {
-    "provider":"copilot",
-    "mode":"eager",
-    "copilot": {
-      "enable_next_edit_suggestions": true
-    }
+    "provider": "copilot"
   },
   "session": {
-    "trust_all_worktrees": true,
-    "restore_unsaved_buffers": true
+    "trust_all_worktrees": true
   },
   "calls": {
     "mute_on_join": true
@@ -75,7 +60,7 @@
   ],
   "buffer_font_family": "FiraCode Nerd Font Mono",
   "buffer_font_size": 13,
-  "buffer_font_weight": 100,
+  "buffer_font_weight": 450,
   "buffer_font_features": {
     "kern": true
   },
@@ -102,11 +87,6 @@
     },
     "HTML": {},
     "Markdown": {
-      "format_on_save": "off",
-      "use_on_type_format": false,
-      "remove_trailing_whitespace_on_save": false,
-      "allow_rewrap": "anywhere",
-      "soft_wrap": "editor_width",
       "completions": {
         "words": "enabled"
       },
@@ -152,8 +132,7 @@
   "git_panel": {
     "dock": "left",
     "show_count_badge": true,
-    "file_icons": true,
-    "tree_view": false
+    "file_icons": true
   },
   "file_finder": {
     "modal_max_width": "large",
@@ -166,24 +145,18 @@
   "preview_tabs": {
     "enable_preview_from_project_panel": false,
     "enabled": false,
-    "enable_preview_multibuffer_from_code_navigation": true,
-    "enable_preview_from_file_finder": false
+    "enable_preview_multibuffer_from_code_navigation": true
   },
   "scrollbar": {
-    "axes": {
-      "horizontal": true
-    },
     "show": "system"
   },
   "tabs": {
     "activate_on_close": "neighbour",
     "file_icons": true,
-    "git_status": true,
-    "show_diagnostics": "off"
+    "git_status": true
   },
   "max_tabs": 5,
   "tab_bar": {
-    "show_pinned_tabs_in_separate_row": false,
     "show_nav_history_buttons": false,
     "show_tab_bar_buttons": false
   },
@@ -191,7 +164,6 @@
     "dock": "left",
     "git_status_indicator": true,
     "diagnostic_badges": true,
-    "show_diagnostics": "all",
     "bold_folder_labels": true,
     "sticky_scroll": false,
     "default_width": 300,
@@ -243,44 +215,6 @@
     "dark": "One Dark Pro Night Flat",
     "light": "Ayu Light"
   },
-  "language_models": {
-    "open_router": {
-      "api_url": "https://openrouter.ai/api/v1",
-      "available_models": [
-        {
-          "name": "openai/gpt-5-pro",
-          "display_name": "GPT-5 Pro",
-          "max_tokens": 400000,
-          "max_output_tokens": 40000,
-          "supports_tools": true,
-          "supports_images": true
-        },
-        {
-          "name": "google/gemini-3-pro-preview",
-          "display_name": "Gemini 3 Pro Preview",
-          "max_tokens": 1000000,
-          "supports_tools": true,
-          "supports_images": true
-        },
-        {
-          "name": "openai/gpt-5.2",
-          "display_name": "GPT-5.2",
-          "max_tokens": 400000,
-          "max_output_tokens": 40000,
-          "supports_tools": true,
-          "supports_images": true
-        },
-        {
-          "name": "openai/chatgpt-5.4",
-          "display_name": "ChatGPT 5.4",
-          "max_tokens": 1100000,
-          "max_output_tokens": 40000,
-          "supports_tools": true,
-          "supports_images": true
-        }
-      ]
-    }
-  },
   "agent_servers": {
     "claude-acp": {
       "default_config_options": {
@@ -308,10 +242,7 @@
   "agent": {
     "limit_content_width": false,
     "max_content_width": 1.0,
-    "button": true,
-    "dock": "left",
     "single_file_review": true,
-    "default_profile": "write",
     "tool_permissions": {
       "default": "allow"
     },
@@ -485,30 +416,14 @@
           "provider": "openrouter",
           "model": "openai/gpt-5.4"
         },
-        "name": "Write",
         "tools": {
-          "search_web": true,
-          "copy_path": true,
-          "create_directory": true,
-          "delete_path": true,
-          "diagnostics": true,
-          "edit_file": true,
-          "fetch": true,
-          "list_directory": true,
           "project_notifications": false,
-          "move_path": true,
           "now": true,
-          "find_path": true,
-          "read_file": true,
           "restore_file_from_disk": true,
           "save_file": true,
           "open": true,
-          "grep": true,
-          "spawn_agent": true,
-          "terminal": true,
           "thinking": true
-        },
-        "enable_all_context_servers": true
+        }
       }
     },
     "message_editor_min_lines": 10,
@@ -538,15 +453,7 @@
     },
     "brave-search": {
       "enabled": true,
-      "command": "/Users/nicholaswmin/.local/bin/brave-search-mcp-server-wrapper",
-      "env": {}
-    },
-    "github": {
-      "enabled": false,
-      "command": "/Users/nicholaswmin/.local/bin/github-mcp-server-wrapper",
-      "args": [
-        "stdio"
-      ],
+      "command": "brave-search-mcp-server-wrapper",
       "env": {}
     },
     "playwright": {
@@ -563,81 +470,83 @@
       "env": {}
     }
   },
-  "experimental.theme_overrides": {
-    "background": "#121212",
-    "elevated_surface.background": "#121212",
-    "surface.background": "#121212",
-    "element.background": "#121212",
-    "element.hover": "#1F1F1Fff",
-    "element.active": "#2A2A2Aff",
-    "element.selected": "#252525ff",
-    "ghost_element.hover": "#1F1F1Fff",
-    "ghost_element.active": "#2A2A2Aff",
-    "ghost_element.selected": "#252525ff",
-    "panel.background": "#121212",
-    "panel.focused_border": "#FFFAF54D",
-    "pane.focused_border": "#FFFAF54D",
-    "editor.background": "#121212",
-    "editor.gutter.background": "#121212",
-    "editor.subheader.background": "#121212",
-    "editor.active_line.background": "#121212",
-    "editor.highlighted_line.background": "#121212",
-    "status_bar.background": "#121212",
-    "title_bar.background": "#121212",
-    "title_bar.inactive_background": "#121212",
-    "toolbar.background": "#121212",
-    "tab_bar.background": "#0C0C0C",
-    "tab.inactive_background": "#0C0C0C",
-    "tab.active_background": "#1A1A1A",
-    "terminal.background": "#121212",
-    "border": "#FFFAF522",
-    "border.variant": "#282726ff",
-    "border.focused": "#FFFAF54D",
-    "border.selected": "#FFFAF540",
-    "border.disabled": "#202020ff",
-    "scrollbar.track.border": "#FFFFFF19",
-    "scrollbar.thumb.background": "#2a2a2a33",
-    "scrollbar.thumb.hover_background": "#3a3a3aff",
-    "scrollbar.thumb.border": "#FFFFFF19",
-    "text": "#F5F5F0",
-    "text.muted": "#A0A09B",
-    "text.placeholder": "#6B6B68",
-    "text.disabled": "#4A4A48",
-    "text.accent": "#D0D0CB",
-    "icon": "#F5F5F0",
-    "icon.muted": "#A0A09B",
-    "icon.placeholder": "#6B6B68",
-    "icon.disabled": "#4A4A48",
-    "version_control.added": "#A0E0B0",
-    "version_control.modified": "#E8D890",
-    "version_control.deleted": "#E8A0A8",
-    "created": "#A0E0B0",
-    "created.background": "#A0E0B01a",
-    "created.border": "#A0E0B03d",
-    "modified": "#E8D890",
-    "modified.background": "#E8D8901a",
-    "modified.border": "#E8D8903d",
-    "deleted": "#E8A0A8",
-    "deleted.background": "#E8A0A81a",
-    "deleted.border": "#E8A0A83d",
-    "syntax": {
-      "enum": {
-        "color": "#D0C4A8"
-      },
-      "property": {
-        "color": "#D0C4A8"
-      },
-      "punctuation.list_marker": {
-        "color": "#D0C4A8"
-      },
-      "punctuation.markup": {
-        "color": "#D0C4A8"
-      },
-      "punctuation.special": {
-        "color": "#C8B896"
-      },
-      "title": {
-        "color": "#D0C4A8"
+  "theme_overrides": {
+    "One Dark Pro Night Flat": {
+      "background": "#121212",
+      "elevated_surface.background": "#121212",
+      "surface.background": "#121212",
+      "element.background": "#121212",
+      "element.hover": "#1F1F1Fff",
+      "element.active": "#2A2A2Aff",
+      "element.selected": "#252525ff",
+      "ghost_element.hover": "#1F1F1Fff",
+      "ghost_element.active": "#2A2A2Aff",
+      "ghost_element.selected": "#252525ff",
+      "panel.background": "#121212",
+      "panel.focused_border": "#FFFAF54D",
+      "pane.focused_border": "#FFFAF54D",
+      "editor.background": "#121212",
+      "editor.gutter.background": "#121212",
+      "editor.subheader.background": "#121212",
+      "editor.active_line.background": "#121212",
+      "editor.highlighted_line.background": "#121212",
+      "status_bar.background": "#121212",
+      "title_bar.background": "#121212",
+      "title_bar.inactive_background": "#121212",
+      "toolbar.background": "#121212",
+      "tab_bar.background": "#0C0C0C",
+      "tab.inactive_background": "#0C0C0C",
+      "tab.active_background": "#1A1A1A",
+      "terminal.background": "#121212",
+      "border": "#FFFAF522",
+      "border.variant": "#282726ff",
+      "border.focused": "#FFFAF54D",
+      "border.selected": "#FFFAF540",
+      "border.disabled": "#202020ff",
+      "scrollbar.track.border": "#FFFFFF19",
+      "scrollbar.thumb.background": "#2a2a2a33",
+      "scrollbar.thumb.hover_background": "#3a3a3aff",
+      "scrollbar.thumb.border": "#FFFFFF19",
+      "text": "#F5F5F0",
+      "text.muted": "#A0A09B",
+      "text.placeholder": "#6B6B68",
+      "text.disabled": "#4A4A48",
+      "text.accent": "#D0D0CB",
+      "icon": "#F5F5F0",
+      "icon.muted": "#A0A09B",
+      "icon.placeholder": "#6B6B68",
+      "icon.disabled": "#4A4A48",
+      "version_control.added": "#A0E0B0",
+      "version_control.modified": "#E8D890",
+      "version_control.deleted": "#E8A0A8",
+      "created": "#A0E0B0",
+      "created.background": "#A0E0B01a",
+      "created.border": "#A0E0B03d",
+      "modified": "#E8D890",
+      "modified.background": "#E8D8901a",
+      "modified.border": "#E8D8903d",
+      "deleted": "#E8A0A8",
+      "deleted.background": "#E8A0A81a",
+      "deleted.border": "#E8A0A83d",
+      "syntax": {
+        "enum": {
+          "color": "#D0C4A8"
+        },
+        "property": {
+          "color": "#D0C4A8"
+        },
+        "punctuation.list_marker": {
+          "color": "#D0C4A8"
+        },
+        "punctuation.markup": {
+          "color": "#D0C4A8"
+        },
+        "punctuation.special": {
+          "color": "#C8B896"
+        },
+        "title": {
+          "color": "#D0C4A8"
+        }
       }
     }
   },
@@ -647,11 +556,13 @@
         "active_pane_modifiers": {
           "border_size": 2
         },
-        "experimental.theme_overrides": {
-          "panel.focused_border": "#FFFFFFB3",
-          "pane.focused_border": "#FFFFFFB3",
-          "border.focused": "#FFFFFFB3",
-          "border.selected": "#FFFFFF80"
+        "theme_overrides": {
+          "One Dark Pro Night Flat": {
+            "panel.focused_border": "#FFFFFFB3",
+            "pane.focused_border": "#FFFFFFB3",
+            "border.focused": "#FFFFFFB3",
+            "border.selected": "#FFFFFF80"
+          }
         }
       }
     },
@@ -660,9 +571,11 @@
         "active_pane_modifiers": {
           "border_size": -1
         },
-        "experimental.theme_overrides": {
-          "border.focused": "#3a3a3aff",
-          "border.selected": "#3a3a3aff"
+        "theme_overrides": {
+          "One Dark Pro Night Flat": {
+            "border.focused": "#3a3a3aff",
+            "border.selected": "#3a3a3aff"
+          }
         }
       }
     },
@@ -671,11 +584,13 @@
         "active_pane_modifiers": {
           "border_size": 3
         },
-        "experimental.theme_overrides": {
-          "panel.focused_border": "#FFFFFFDD",
-          "pane.focused_border": "#FFFFFFDD",
-          "border.focused": "#FFFFFFDD",
-          "border.selected": "#FFFFFFAA"
+        "theme_overrides": {
+          "One Dark Pro Night Flat": {
+            "panel.focused_border": "#FFFFFFDD",
+            "pane.focused_border": "#FFFFFFDD",
+            "border.focused": "#FFFFFFDD",
+            "border.selected": "#FFFFFFAA"
+          }
         }
       }
     }

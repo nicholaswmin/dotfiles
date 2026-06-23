@@ -1,6 +1,3 @@
-# options.zsh
-# shell option toggles
-
 # directory navigation
 setopt AUTO_CD
 setopt AUTO_PUSHD
@@ -8,7 +5,6 @@ setopt PUSHD_IGNORE_DUPS
 setopt CDABLE_VARS
 
 # globbing
-setopt EXTENDED_GLOB
 setopt GLOB_DOTS
 
 # history

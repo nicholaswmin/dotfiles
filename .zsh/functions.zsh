@@ -1,10 +1,6 @@
-# functions.zsh
-# custom shell functions
-
-PS_LABEL="tunnel"
-
 # always search hidden files unless told otherwise
 fd() {
+  emulate -L zsh
   local a
   for a in "$@"; do
     [[ $a == -H || $a == --hidden ]] && { command fd "$@"; return }
@@ -14,6 +10,7 @@ fd() {
 
 # quit every foreground app except comma-separated keep list
 fresh() {
+  emulate -L zsh
   local -a keep
   local p
   for p in ${(s:,:)1}; do
@@ -34,8 +31,9 @@ fresh() {
   wait
 }
 
-# filesystem create/modify changes in the last N hours (default 24, 50 rows)
+# filesystem create/modify changes in the last N hours; defaults to 24 hours and 50 rows
 lc() {
+  emulate -L zsh
   local h=${1:-24} n=${2:-50}
   [[ $h == <1-> ]] || h=24
   [[ $n == <1-> ]] || n=50
@@ -73,8 +71,9 @@ lc() {
     done
 }
 
-# make files immutable (uchg)
+# make files immutable with uchg
 lock() {
+  emulate -L zsh
   (( $# )) || { print -u2 "usage: lock <file> ..."; return 1 }
   local f
   for f in "$@"; do
@@ -89,6 +88,7 @@ lock() {
 
 # clear the immutable flag
 unlock() {
+  emulate -L zsh
   (( $# )) || { print -u2 "usage: unlock <file> ..."; return 1 }
   local f
   for f in "$@"; do
@@ -103,60 +103,24 @@ unlock() {
 
 # route deletions through the trash
 rm() {
-  local -a files=(${@:#-*})
+  emulate -L zsh
+  local -a files
+  local a seen_dd=0
+  for a in "$@"; do
+    if (( seen_dd )); then files+=("$a")
+    elif [[ $a == -- ]]; then seen_dd=1
+    elif [[ $a == -* ]]; then continue
+    else files+=("$a")
+    fi
+  done
   (( $#files )) || { print -u2 "usage: rm <file> ..."; return 1 }
   command trash "${files[@]}"
 }
 
 # shpotify wrapper: no args -> help, one arg -> play
 spotify() {
+  emulate -L zsh
   (( $# )) || { command spotify --help; return }
   (( $# == 1 )) && { command spotify play "$1"; return }
   command spotify "$@"
-}
-
-# expose a local directory or proxy a url over cloudflare
-tunnel() {
-  command -v cloudflared &>/dev/null || {
-    print -u2 "cloudflared not installed; brew install cloudflared"
-    return 1
-  }
-
-  local named=""
-  if [[ ${1-} == -d ]]; then
-    named=${2-}
-    [[ -n $named ]] || { print -u2 "-d requires a tunnel name"; return 1 }
-    shift 2
-  fi
-
-  local target=${1:-.} dir url
-  if [[ -d $target ]]; then
-    dir=${target:A}
-  elif [[ -e $target ]]; then
-    print -u2 "path must be a directory: $target"
-    return 1
-  else
-    [[ -n $named ]] && { print -u2 "-d requires a directory path"; return 1 }
-    url=$target
-    [[ $url != *://* ]] && url="http://$url"
-    command cloudflared tunnel --label "$PS_LABEL" --url "$url"
-    return
-  fi
-
-  local port=8473 server_pid=""
-  trap '[[ -n $server_pid ]] && kill $server_pid 2>/dev/null; trap - INT TERM EXIT' INT TERM EXIT
-  python3 -m http.server "$port" -d "$dir" &>/dev/null &
-  server_pid=$!
-  sleep 0.3
-  kill -0 "$server_pid" 2>/dev/null || { print -u2 "file server failed on :$port"; return 1 }
-
-  if [[ -n $named ]]; then
-    command cloudflared tunnel --label "$PS_LABEL" run --url "http://localhost:$port" "$named"
-  else
-    command cloudflared tunnel --label "$PS_LABEL" --url "http://localhost:$port"
-  fi
-  local ret=$?
-  kill "$server_pid" 2>/dev/null
-  trap - INT TERM EXIT
-  return "$ret"
 }

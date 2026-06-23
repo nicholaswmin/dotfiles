@@ -1,9 +1,6 @@
 #!/usr/bin/env sh
-# test - restore the CURRENT working tree onto a brand-new machine and assert it.
-# Runs the real bootstrap TWICE - the restore MUST be idempotent, a re-run is a
-# clean no-op - then the shared assert.sh. Bundles the working tree and points
-# bootstrap at the bundle in a clean Tart VM (DOTFILES_REPO/REF), so it tests THIS
-# checkout, not main. Requires tart; sshpass is auto-installed from homebrew-core.
+# test: restore the working tree onto a clean Tart VM, run bootstrap twice for
+# idempotency, then assert. needs tart; sshpass auto-installs.
 set -eu
 
 IMAGE="ghcr.io/cirruslabs/macos-tahoe-base:latest"
@@ -11,22 +8,17 @@ VM="dotfiles-test-$$"
 BUNDLE="${TMPDIR:-/tmp}/dotfiles-$$.bundle"
 SSHOPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
-# --- logging: full transcript to a timestamped file; progress to the terminal --
-# fd 3 stays the terminal (coloured ==> progress); stdout+stderr go to the log.
-# No pipe, so the exit status is preserved. Colour tested on fd 3.
+# logging: stdout+stderr to a timestamped log; fd 3 stays the terminal for progress.
 LOG="${TMPDIR:-/tmp}/dotfiles-test-$(date +%Y%m%d-%H%M%S).log"
 exec 3>&2
 exec >>"$LOG" 2>&1
-if   [ -n "${NO_COLOR+x}" ];                 then _color=0
-elif [ "${CLICOLOR_FORCE:-0}" != 0 ];        then _color=1
-elif [ "${CLICOLOR:-1}" != 0 ] && [ -t 3 ];  then _color=1
-else                                              _color=0
+_grn='' _red='' _rst=''
+if [ -z "${NO_COLOR+x}" ] &&
+   { [ "${CLICOLOR_FORCE:-0}" != 0 ] || { [ "${CLICOLOR:-1}" != 0 ] && [ -t 3 ]; }; }
+then
+  _grn=$(printf '\033[1;32m') _red=$(printf '\033[1;31m') _rst=$(printf '\033[0m')
 fi
-if [ "$_color" = 1 ]; then
-  _grn=$(printf '\033[1;32m'); _red=$(printf '\033[1;31m'); _rst=$(printf '\033[0m')
-else
-  _grn=''; _red=''; _rst=''
-fi
+
 say() { printf '==> %s\n' "$*"; printf '%s %s\n' "${_grn}==>${_rst}"   "$*" >&3; }
 die() { printf 'error: %s\n' "$*"; printf '%s %s\n' "${_red}error:${_rst}" "$*" >&3; exit 1; }
 
@@ -70,7 +62,7 @@ while [ "$i" -lt 60 ]; do
 done
 [ -n "$IP" ] || die "VM never accepted ssh"
 
-# 3 - restore THIS working tree via the real bootstrap, twice (idempotent), then assert
+# 3 - restore THIS working tree via the real bootstrap twice for idempotency, then assert
 say "restore (current working tree) on clean VM"
 put "$BUNDLE" /tmp/dotfiles.bundle
 run "git clone -q --branch _dotfiles-test /tmp/dotfiles.bundle /tmp/seed \

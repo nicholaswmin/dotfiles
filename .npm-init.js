@@ -4,7 +4,7 @@ module.exports = {
   name: path.basename(process.cwd()),
   version: '0.1.0',
   type: 'module',
-  author: 'Nik. Kyriakides <nicholaswmin>',
+  author: 'Nik. Kyriakides <nik.kyriakides@gmail.com>',
   license: 'MIT',
   repository: {
     type: 'git',
