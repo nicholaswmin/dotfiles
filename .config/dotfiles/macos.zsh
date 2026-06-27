@@ -14,6 +14,12 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
 defaults write com.apple.finder FXDefaultSearchScope -string SCcf
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+defaults write com.apple.finder QuitMenuItem -bool true
+defaults write com.apple.finder NewWindowTarget -string PfHm
+defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 killall Finder 2>/dev/null || true
@@ -46,6 +52,14 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Panels - expand save/print, save to disk not iCloud
+say panels
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Screenshots - png to ~/Desktop, no window shadow
 say screenshots
@@ -80,6 +94,11 @@ defaults write com.apple.Terminal "Startup Window Settings" -string OneDark
 
 # Dock - pin installed apps, skip any that are absent
 say dock
+defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock mru-spaces -bool false
+defaults write com.apple.dock mineffect -string scale
+defaults write com.apple.dock show-process-indicators -bool true
 dock=(
   /Applications/Zed.app
   /Applications/Spotify.app
@@ -96,6 +115,11 @@ for app in $dock; do
   defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 done
 killall Dock 2>/dev/null || true
+
+# TextEdit - plain text + UTF-8
+say textedit
+defaults write com.apple.TextEdit RichText -int 0
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
 
 # Editor: Zed as the default for code files. Associations live in the sibling `duti` file.
 # Skipped under CI - GitHub runners do not honour LaunchServices handler changes.
