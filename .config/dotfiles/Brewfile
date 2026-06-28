@@ -50,4 +50,4 @@ cask "font-sf-pro"              # Apple SF Pro (Zed ui_font_family)
 cask "font-sf-compact"         # Apple SF Compact
 cask "font-sf-mono"            # Apple SF Mono (Zed terminal panel)
 cask "font-new-york"           # Apple New York (NY serif)
-cask "sf-symbols"            # SF Symbols app (symbol browser)
+cask "sf-symbols"              # SF Symbols app (symbol browser)
