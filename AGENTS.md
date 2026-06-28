@@ -4,6 +4,11 @@
 > Git tracking follows the [DeVault convention][dv-dot]: `gitignore *` plus
 > force-add.
 
+> [!CAUTION]
+> This is the canonical dotfiles repository. A separate `.dots` repository may
+> exist on a machine; it is deprecated. Never read, edit, sync, or conflate it
+> with this one.
+
 ## Shape
 
 - `$HOME` is the repo; `.gitignore` is a single `*`, track with `git add -f`
