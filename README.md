@@ -47,12 +47,11 @@ exec zsh -l
 
 ### post-restore
 
-mint the local stuff; mainly logins:
+mint the local stuff:
 
 - ssh + signing key at `~/.ssh/id_ed25519_signing.pub`, added to GitHub
-- `gh auth login`
-- `aws` and `cloudflared` logins
-- create the `environment` keychain, add your keys
+- logins, e.g: iCloud, `gh auth login`, `heroku auth login`, etc
+- create the `.env` keychain & add keys
 - Spotlight in System Settings:
   - Search Results: keep only Documents + Files & Folders
   - Search Privacy: exclude `~/Projects`

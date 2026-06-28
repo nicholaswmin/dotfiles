@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH="/opt/homebrew/bin:$PATH"
 eval "$(fnm env 2>/dev/null)" 2>/dev/null
-BRAVE_API_KEY="$(security find-generic-password -s brave -w "$HOME/Library/Keychains/environment.keychain-db")" || {
+BRAVE_API_KEY="$(security find-generic-password -s brave -w "$HOME/Library/Keychains/.env.keychain-db")" || {
   echo "brave-search wrapper: 'brave' secret not in the environment keychain" >&2
   exit 1
 }
